@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 1.0.3
+echo Version: 1.0.4
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -59,6 +59,8 @@ echo Invalid Syntax
 goto Sure1
 
 :Copy1
+echo.
+echo Copying %UserProfileFrom% to %UserProfileTo%.
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /e /r /h /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error1
 echo User Profile transfer complete! Press any key to continue.
@@ -88,6 +90,8 @@ set FileTo=
 set /p FileTo="Where do you want to save the user profile %UserProfileFrom% to? "
 if not exist "%FileTo%" goto FileToNotExist
 if exist "%FileTo%\%UserProfileFrom% File" goto FileToFileExist
+echo.
+echo Copying %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%UserProfileFrom% File"
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /e /r /h /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
@@ -146,6 +150,8 @@ echo Invalid Syntax
 goto Sure3
 
 :Copy3
+echo.
+echo Copying "%File%" to %UserProfileTo%.
 xcopy "%File%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /e /r /h /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
 echo.
