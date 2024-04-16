@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 1.0.1
+echo Version: 1.0.2
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -30,16 +30,19 @@ net user
 set UserProfileFrom=
 set /p UserProfileFrom="Which profile to you want to transfer data from? "
 if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto UserProfileFromNotExist1
-echo.
-set UserProfileTo=
-set /p UserProfileTo="Which profile to you want to transfer data to? "
-if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileFromNotExist1
-goto Sure1
+goto 1UserProfileTo
 
 :UserProfileFromNotExist1
 echo.
 echo %UserProfileFrom% does not exist! Please try again.
 goto 1
+
+:1UserProfileTo
+echo.
+set UserProfileTo=
+set /p UserProfileTo="Which profile to you want to transfer data to? "
+if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileFromNotExist1
+goto Sure1
 
 :UserProfileToNotExist1
 echo.
@@ -72,6 +75,14 @@ net user
 set UserProfileFrom=
 set /p UserProfileFrom="Which profile to you want to transfer data from? "
 if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto UserProfileFromNotExist2
+goto FileTo
+
+:UserProfileFromNotExist2
+echo.
+echo %UserProfileFrom% does not exist! Please try again.
+goto 2
+
+:FileTo
 echo.
 set FileTo=
 set /p FileTo="Where do you want to save the user profile %UserProfileFrom% to? "
@@ -81,11 +92,6 @@ md "%FileTo%\%UserProfileFrom% File"
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /e /r /h /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 goto 2Done
-
-:UserProfileFromNotExist2
-echo.
-echo %UserProfileFrom% does not exist! Please try again.
-goto 2
 
 :FileToNotExist
 echo "%FileTo%" does not exist. Please try again.
@@ -111,16 +117,19 @@ echo.
 set File=
 set /p File="What is the full path to your copied user profile file? "
 if not exist "%File%" goto FileNotExist
-net user
-set UserProfileTo=
-set /p UserProfileTo="Which profile to you want to transfer data to? "
-if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileFromNotExist2
-goto Sure3
+goto 2UserProfileTo
 
 :FileNotExist
 echo.
 echo "%File%" does not exist! You can try again.
 goto 3
+
+:2UserProfileTo
+net user
+set UserProfileTo=
+set /p UserProfileTo="Which profile to you want to transfer data to? "
+if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileFromNotExist2
+goto Sure3
 
 :UserProfileToNotExist2
 echo.
