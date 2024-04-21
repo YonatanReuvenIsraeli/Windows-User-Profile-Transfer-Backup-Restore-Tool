@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Backup Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 2.0.2
+echo Version: 2.0.3
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -40,7 +40,7 @@ goto Start
 :1
 net user
 set UserProfileFrom=
-set /p UserProfileFrom="Which profile to you want to transfer data from? "
+set /p UserProfileFrom="Which user profile to you want to transfer data from? "
 if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto UserProfileFromNotExist1
 if not "%UserProfileFrom%"=="%USERNAME%" goto NotCurrentUser
 goto FileTo
