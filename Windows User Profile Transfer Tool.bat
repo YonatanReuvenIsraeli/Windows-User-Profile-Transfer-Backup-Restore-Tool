@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 1.0.6
+echo Version: 1.0.7
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -21,7 +21,7 @@ echo.
 echo [1] Transfer from a user to another user on the same computer.
 echo [2] Copy to file.
 echo [3] Transfer from file to user.
-echo [4] Exit
+echo [4] Exit.
 set Start=
 set /p Start=" What would you like to do? (1-4) "
 if /i "%Start%"=="1" goto 1
@@ -67,7 +67,7 @@ goto Sure1
 :Copy1
 echo.
 echo Copying %UserProfileFrom% to %UserProfileTo%.
-xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /t /e /k /r /h /c /q > nul 2>&1
+xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /h /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error1
 echo.
 echo User Profile transfer complete! Press any key to continue.
@@ -100,7 +100,7 @@ if exist "%FileTo%\%UserProfileFrom% File" goto FileToFileExist
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%UserProfileFrom% File"
-xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /t /e /k /r /h /c /q > nul 2>&1
+xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /h /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 echo.
 echo %UserProfileFrom% copied to "%FileTo%\%UserProfileFrom% File". Press any key to continue.
@@ -157,7 +157,7 @@ goto Sure3
 :Copy3
 echo.
 echo Copying "%File%" to %UserProfileTo%.
-xcopy "%File%\*.*" "%SystemDrive%\Users\%UserProfileTo%" xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /t /e /k /r /h /c /q > nul 2>&1 > nul 2>&1
+xcopy "%File%\*.*" "%SystemDrive%\Users\%UserProfileTo%" xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /h /c /q > nul 2>&1 > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
 echo.
 echo User Profile transfer complete! Press any key to continue.
