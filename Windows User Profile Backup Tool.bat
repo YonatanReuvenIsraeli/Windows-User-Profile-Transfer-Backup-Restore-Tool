@@ -1,8 +1,8 @@
 @echo off
 setlocal
-title Windows User Profile Transfer Tool
+title Windows User Profile Backup Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 1.1.4
+echo Version: 2.0.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -26,16 +26,14 @@ exit
 
 :Start
 echo.
-echo [1] Transfer from a user to another user on the same computer.
-echo [2] Copy to file.
-echo [3] Transfer from file to user.
-echo [4] Exit.
+echo [1] Copy to file.
+echo [2] Transfer from file to user.
+echo [3] Exit.
 set Start=
 set /p Start=" What would you like to do? (1-4) "
 if /i "%Start%"=="1" goto 1
 if /i "%Start%"=="2" goto 2
-if /i "%Start%"=="3" goto 3
-if /i "%Start%"=="4" goto Close
+if /i "%Start%"=="3" goto Close
 echo Invalid Syntax!
 goto Start
 
@@ -44,62 +42,13 @@ net user
 set UserProfileFrom=
 set /p UserProfileFrom="Which profile to you want to transfer data from? "
 if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto UserProfileFromNotExist1
-goto 1UserProfileTo
+if not "%UserProfileFrom%"=="%USERNAME%" goto NotCurrentUser
+goto FileTo
 
 :UserProfileFromNotExist1
 echo.
 echo %UserProfileFrom% does not exist! Please try again.
 goto 1
-
-:1UserProfileTo
-echo.
-set UserProfileTo=
-set /p UserProfileFrom="Which profile to you want to transfer data to? "
-if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileFromNotExist1
-goto Sure1
-
-:UserProfileToNotExist1
-echo.
-echo %UserProfileTo% does not exist! Please try again.
-goto 1
-
-:Sure1
-echo.
-set Sure=
-set /p Sure1="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
-if /i "%Sure1%"=="Yes" goto Copy1
-if /i "%Sure1%"=="No" goto Start
-echo Invalid Syntax
-goto Sure1
-
-:Copy1
-echo.
-echo Copying %UserProfileFrom% to %UserProfileTo%.
-net user %UserProfileFrom% /active:yes > nul 2>&1
-net user %UserProfileTo% /active:yes > nul 2>&1
-xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q /h > nul 2>&1
-if not "%errorlevel%"=="0" goto Error1
-echo.
-echo User Profile transfer complete! Press any key to continue.
-pause > nul 2>&1
-goto Start
-
-:Error1
-echo.
-echo There has been an error! You can try again.
-goto 1
-
-:2
-net user
-set UserProfileFrom=
-set /p UserProfileFrom="Which profile to you want to transfer data from? "
-if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto UserProfileFromNotExist2
-goto FileTo
-
-:UserProfileFromNotExist2
-echo.
-echo %UserProfileFrom% does not exist! Please try again.
-goto 2
 
 :FileTo
 echo.
@@ -109,10 +58,9 @@ if not exist "%FileTo%" goto FileToNotExist
 if exist "%FileTo%\%UserProfileFrom% File" goto FileToFileExist
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
-net user %UserProfileTo% /active:yes > nul 2>&1
 md "%FileTo%\%UserProfileFrom% File"
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q /h > nul 2>&1
-if not "%errorlevel%"=="0" goto Error2
+if not "%errorlevel%"=="0" goto Error1
 echo.
 echo %UserProfileFrom% copied to "%FileTo%\%UserProfileFrom% File". Press any key to continue.
 pause > nul 2>&1
@@ -120,19 +68,19 @@ goto Start
 
 :FileToNotExist
 echo "%FileTo%" does not exist. Please try again.
-goto 2
+goto 1
 
 :FileToFileExist
 echo Please rename or move  to another location "%FileTo%\%UserProfileFrom%" in order for this batch file to continue. Press any key to continue when you have renamed or moved  to another location "%FileTo%\%UserProfileFrom%".
 pause > nul 2>&1
-goto 2
+goto 1
 
-:Error2
+:Error1
 echo.
 echo There has been an error! You can try again.
-goto 2
+goto 1
 
-:3
+:2
 echo.
 set File=
 set /p File="What is the full path to your copied user profile file? "
@@ -142,44 +90,49 @@ goto 2UserProfileTo
 :FileNotExist
 echo.
 echo "%File%" does not exist! You can try again.
-goto 3
+goto 2
 
 :2UserProfileTo
 net user
 set UserProfileTo=
-set /p UserProfileTo="Which profile to you want to transfer data to? "
+set /p UserProfileTo="Which user profile to you want to transfer data to? "
 if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileFromNotExist2
-goto Sure3
+if not "%UserProfileFrom%"=="%USERNAME%" goto NotCurrentUser
+goto Sure2
 
 :UserProfileToNotExist2
 echo.
 echo %UserProfileTo% does not exist! Please try again.
-goto 3
+goto 2
 
-:Sure3
+:Sure2
 echo.
 set Sure3=
 set /p Sure3="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
-if /i "%Sure3%"=="Yes" goto Copy3
+if /i "%Sure3%"=="Yes" goto Copy2
 if /i "%Sure3%"=="No" goto Start
 echo Invalid Syntax
-goto Sure3
+goto Sure2
 
-:Copy3
+:Copy2
 echo.
 echo Copying "%File%" to %UserProfileTo%.
-net user %UserProfileTo% /active:yes > nul 2>&1
 xcopy "%File%\*.*" "%SystemDrive%\Users\%UserProfileTo%" xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q /h > nul 2>&1 > nul 2>&1
-if not "%errorlevel%"=="0" goto Error3
+if not "%errorlevel%"=="0" goto Error2
 echo.
 echo User Profile transfer complete! Press any key to continue.
 pause > nul 2>&1
 goto Start
 
-:Error3
+:Error2
 echo.
 echo There has been an error! You can try again.
-goto 3
+goto 2
+
+:NotCurrentUser
+echo.
+echo %UserProfileFrom% is not the current user. Please switch switch user to %UserProfileFrom%. Press any key to close this batch file.
+goto Close
 
 :Close
 endlocal
