@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Backup Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 2.0.1
+echo Version: 2.0.2
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -132,6 +132,7 @@ goto 2
 :NotCurrentUser
 echo.
 echo %UserProfileFrom% is not the current user. Please switch switch user to %UserProfileFrom%. Press any key to close this batch file.
+pause > nul 2>&1
 goto Close
 
 :Close
