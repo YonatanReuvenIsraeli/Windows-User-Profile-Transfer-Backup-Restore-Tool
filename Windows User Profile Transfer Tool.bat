@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 1.1.0
+echo Version: 1.1.1
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -12,17 +12,17 @@ net user > nul 2>&1
 if not "%errorlevel%"=="0" goto WindowsRecoveryEnvironment
 goto Start
 
-:WindowsRecoverynvironment
-echo.
-echo Please do not run this batch file from Windows Recovery Environment. Press any key to close this batch file.
-pause > nul 2>&1
-exit
-
 :NotAdministrator
 echo.
 echo Please run this batch file as an administrator. Press any key to close this batch file.
 pause > nul 2>&1
 goto Close
+
+:WindowsRecoverynvironment
+echo.
+echo Please do not run this batch file from Windows Recovery Environment. Press any key to close this batch file.
+pause > nul 2>&1
+exit
 
 :Start
 echo.
