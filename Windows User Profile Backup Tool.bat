@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Backup Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 2.0.0
+echo Version: 2.0.1
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -30,7 +30,7 @@ echo [1] Copy to file.
 echo [2] Transfer from file to user.
 echo [3] Exit.
 set Start=
-set /p Start=" What would you like to do? (1-4) "
+set /p Start=" What would you like to do? (1-3) "
 if /i "%Start%"=="1" goto 1
 if /i "%Start%"=="2" goto 2
 if /i "%Start%"=="3" goto Close
