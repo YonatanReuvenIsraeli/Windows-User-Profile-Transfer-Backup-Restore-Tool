@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 1.0.9
+echo Version: 1.0.10
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -67,7 +67,7 @@ goto Sure1
 :Copy1
 echo.
 echo Copying %UserProfileFrom% to %UserProfileTo%.
-net user %UserProfileTo% /active:yes
+net user %UserProfileTo% /active:yes > nul 2>&1
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q /h > nul 2>&1
 if not "%errorlevel%"=="0" goto Error1
 echo.
@@ -158,7 +158,7 @@ goto Sure3
 :Copy3
 echo.
 echo Copying "%File%" to %UserProfileTo%.
-net user %UserProfileTo% /active:yes
+net user %UserProfileTo% /active:yes > nul 2>&1
 xcopy "%File%\*.*" "%SystemDrive%\Users\%UserProfileTo%" xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q /h > nul 2>&1 > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
 echo.
