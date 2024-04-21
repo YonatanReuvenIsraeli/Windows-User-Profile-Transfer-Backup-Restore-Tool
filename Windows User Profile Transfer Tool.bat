@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 1.1.2
+echo Version: 1.1.3
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -108,6 +108,7 @@ if not exist "%FileTo%" goto FileToNotExist
 if exist "%FileTo%\%UserProfileFrom% File" goto FileToFileExist
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
+net user %UserProfileTo% /active:yes > nul 2>&1
 md "%FileTo%\%UserProfileFrom% File"
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q /h > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
