@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 3.0.1
+echo Version: 3.0.2
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -74,6 +74,7 @@ goto Sure1
 
 :HiddenSytem1
 echo.
+set HiddenSystem2=
 set /p HiddenSystem2 "This will not copy hidden and system files! Are you sure you want to continue? " (Yes/No)
 if /i "%HiddenSystem2%"=="Yes" goto Copy1
 if /i "%HiddenSystem2%"=="No" goto Start
@@ -115,8 +116,13 @@ if not exist "%FileTo%" goto FileToNotExist
 if exist "%FileTo%\%UserProfileFrom% File" goto FileToFileExist
 goto HiddenSystem2
 
+:FileToNotExist
+echo "%FileTo%" does not exist. Please try again.
+goto 2
+
 :HiddenSystem2
 echo.
+set HiddenSystem2=
 set /p HiddenSystem2 "This will not copy hidden and system files! Are you sure you want to continue? " (Yes/No)
 if /i "%HiddenSystem2%"=="Yes" goto Copy2
 if /i "%HiddenSystem2%"=="No" goto Start
@@ -133,10 +139,6 @@ echo.
 echo %UserProfileFrom% copied to "%FileTo%\%UserProfileFrom% File". Press any key to continue.
 pause > nul 2>&1
 goto Start
-
-:FileToNotExist
-echo "%FileTo%" does not exist. Please try again.
-goto 2
 
 :FileToFileExist
 echo Please rename or move  to another location "%FileTo%\%UserProfileFrom%" in order for this batch file to continue. Press any key to continue when you have renamed or moved  to another location "%FileTo%\%UserProfileFrom%".
