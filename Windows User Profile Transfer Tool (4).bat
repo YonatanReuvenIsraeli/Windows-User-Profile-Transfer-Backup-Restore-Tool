@@ -76,7 +76,7 @@ goto Sure1
 echo.
 echo Copying %UserProfileFrom% to %UserProfileTo%.
 net user %UserProfileTo% /active:yes > nul 2>&1
-xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q /h > nul 2>&1
+xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error1
 echo.
 echo User Profile transfer complete! Press any key to continue.
@@ -110,7 +110,7 @@ echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
 net user %UserProfileTo% /active:yes > nul 2>&1
 md "%FileTo%\%UserProfileFrom% File"
-xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q /h > nul 2>&1
+xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 echo.
 echo %UserProfileFrom% copied to "%FileTo%\%UserProfileFrom% File". Press any key to continue.
@@ -168,7 +168,7 @@ goto Sure3
 echo.
 echo Copying "%File%" to %UserProfileTo%.
 net user %UserProfileTo% /active:yes > nul 2>&1
-xcopy "%File%\*.*" "%SystemDrive%\Users\%UserProfileTo%" xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q /h > nul 2>&1 > nul 2>&1
+xcopy "%File%\*.*" "%SystemDrive%\Users\%UserProfileTo%" xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1 > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
 echo.
 echo User Profile transfer complete! Press any key to continue.
