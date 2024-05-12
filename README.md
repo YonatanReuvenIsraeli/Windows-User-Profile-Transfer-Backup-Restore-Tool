@@ -1,2 +1,2 @@
 # Windows-User-Profile-Transfer-Tool
-Transfer Windows user profiles.
+Transfer and/or backup Windows user profiles.
