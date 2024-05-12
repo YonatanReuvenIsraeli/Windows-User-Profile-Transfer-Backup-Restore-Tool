@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 1.1.4
+echo Version: 1.2.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -66,11 +66,19 @@ goto 1
 :Sure1
 echo.
 set Sure=
-set /p Sure1="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
-if /i "%Sure1%"=="Yes" goto Copy1
+set /p Sure1="This will overwrite files with the same name! (Yes/No) "
+if /i "%Sure1%"=="Yes" goto HiddenSystem1
 if /i "%Sure1%"=="No" goto Start
 echo Invalid Syntax
 goto Sure1
+
+:HiddenSytem1
+echo.
+set /p HiddenSystem2 "This will not copy hidden and system files! Are you sure you want to continue? " (Yes/No)
+if /i "%HiddenSystem2%"=="Yes" goto Copy1
+if /i "%HiddenSystem2%"=="No" goto Start
+echo Invalid Syntax!
+goto HiddenSystem2
 
 :Copy1
 echo.
@@ -106,6 +114,17 @@ set FileTo=
 set /p FileTo="Where do you want to save the user profile %UserProfileFrom% to? "
 if not exist "%FileTo%" goto FileToNotExist
 if exist "%FileTo%\%UserProfileFrom% File" goto FileToFileExist
+goto HiddenSystem2
+
+:HiddenSystem2
+echo.
+set /p HiddenSystem2 "This will not copy hidden and system files! Are you sure you want to continue? " (Yes/No)
+if /i "%HiddenSystem2%"=="Yes" goto Copy2
+if /i "%HiddenSystem2%"=="No" goto Start
+echo Invalid Syntax!
+goto HiddenSystem2
+
+:Copy2
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
 net user %UserProfileTo% /active:yes > nul 2>&1
