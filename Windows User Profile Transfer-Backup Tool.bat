@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 3.0.5
+echo Version: 3.0.6
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -28,7 +28,7 @@ exit
 echo.
 echo [1] Transfer from a user to another user on the same computer.
 echo [2] Copy user to file.
-echo [3] Transfer from file to user.
+echo [3] Copy from file to user.
 echo [4] Exit.
 set Start=
 set /p Start=" What would you like to do? (1-4) "
