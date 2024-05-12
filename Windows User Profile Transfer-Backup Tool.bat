@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 3.0.7
+echo Version: 3.0.8
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -79,7 +79,7 @@ set /p HiddenSystem2="This will not copy hidden and system files! Are you sure y
 if /i "%HiddenSystem2%"=="Yes" goto Copy1
 if /i "%HiddenSystem2%"=="No" goto Start
 echo Invalid Syntax!
-goto HiddenSystem2
+goto HiddenSystem1
 
 :Copy1
 echo.
