@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup Tool
 echo Program Name: Windows User Profile Transfer Tool
-echo Version: 4.0.1
+echo Version: 4.0.2
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -213,7 +213,7 @@ goto 3
 :Driveletter
 echo.
 set DriveLetter=
-set /p DriveLetter="What is the drive letter of the connected Windows drive. (A:-Z:) "
+set /p DriveLetter="What is the drive letter of your connected Windows drive? (A:-Z:) "
 if /i "%DriveLetter%"=="A:" goto SureDriveLetter
 if /i "%DriveLetter%"=="B:" goto SureDriveLetter
 if /i "%DriveLetter%"=="C:" goto SureDriveLetter
@@ -246,7 +246,7 @@ goto DriveLetter
 :SureDriveLetter
 echo.
 set SureDriveLetter=
-set /p SureDriveLetter="Are you sure "%DriveLetter%" is the drive letter of your Windows Disk Image? (Yes/No) "
+set /p SureDriveLetter="Are you sure "%DriveLetter%" is the drive letter of your your connected Windows drive? (Yes/No) "
 if /i "%SureDriveLetter%"=="Yes" goto CheckExistDriveLetter
 if /i "%SureDriveLetter%"=="No" goto DriveLetter
 echo Invalid Syntax!
