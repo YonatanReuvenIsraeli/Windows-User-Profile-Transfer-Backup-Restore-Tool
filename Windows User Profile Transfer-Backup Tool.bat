@@ -1,8 +1,8 @@
 @echo off
 setlocal
 title Windows User Profile Transfer/Backup Tool
-echo Program Name: Windows User Profile Transfer Tool
-echo Version: 4.0.2
+echo Program Name: Windows User Profile Transfer/Backup Tool
+echo Version: 4.0.3
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -394,7 +394,7 @@ goto 6
 net user
 set UserProfileTo=
 set /p UserProfileTo="Which profile to you want to transfer data to? "
-if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileToNotExist4
+if not exist "%DriveLetter%\Users\%UserProfileTo%" goto UserProfileToNotExist4
 goto Sure3
 
 :UserProfileToNotExist4
