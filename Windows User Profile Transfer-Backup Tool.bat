@@ -142,8 +142,8 @@ goto HiddenSystem2
 :Copy2
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
-md "%FileTo% %UserProfileFrom% File"
-xcopy "%UserProfileFrom%\*.*" "%FileTo% %UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
+md "%FileTo%\%UserProfileFrom% File"
+xcopy "%UserProfileFrom%\*.*" "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 echo.
 echo %UserProfileFrom% copied to "%FileTo%\%UserProfileFrom% File". Press any key to continue.
