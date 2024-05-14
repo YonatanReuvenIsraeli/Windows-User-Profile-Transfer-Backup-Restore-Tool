@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup Tool
 echo Program Name: Windows User Profile Transfer/Backup Tool
-echo Version: 5.0.0
+echo Version: 5.0.1
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -104,9 +104,9 @@ goto 1
 :2
 echo.
 set UserProfileFrom=
-set /p UserProfileFrom="Which profile to you want to transfer data from? "
+set /p UserProfileFrom="What is the user profile path to you want to transfer data from? "
 if not exist "%UserProfileFrom%" goto UseProfileFromNotExist2
-goto FileTo2
+goto FileTo
 
 :UserProfileFromNotExist2
 echo.
@@ -170,7 +170,7 @@ goto 3
 :UserProfileTo2
 net user
 set UserProfileTo=
-set /p UserProfileTo="Which profile to you want to transfer data to? "
+set /p UserProfileTo="What is the user profile path that you want to transfer data to? "
 if not exist "%UserProfileTo%" goto UserProfileToNotExist2
 goto Sure3
 
