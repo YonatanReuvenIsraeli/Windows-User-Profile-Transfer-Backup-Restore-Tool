@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup Tool
 echo Program Name: Windows User Profile Transfer/Backup Tool
-echo Version: 5.0.3
+echo Version: 5.0.4
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -142,7 +142,7 @@ goto HiddenSystem2
 :Copy2
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
-md "%FileTo%\%UserProfileFrom% File"
+md "%FileTo% %UserProfileFrom% File"
 xcopy "%UserProfileFrom%\*.*" "%FileTo% %UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 echo.
