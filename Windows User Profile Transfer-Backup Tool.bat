@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup Tool
 echo Program Name: Windows User Profile Transfer/Backup Tool
-echo Version: 4.0.3
+echo Version: 4.0.4
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -150,7 +150,7 @@ goto HiddenSystem2
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%UserProfileFrom% File"
-xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 echo.
 echo %UserProfileFrom% copied to "%FileTo%\%UserProfileFrom% File". Press any key to continue.
@@ -366,7 +366,7 @@ goto HiddenSystem4
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%UserProfileFrom% File"
-xcopy "%DriveLetter%\Users\%UserProfileFrom%\*.*"  "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%DriveLetter%\Users\%UserProfileFrom%\*.*" "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error5
 echo.
 echo %UserProfileFrom% copied to "%FileTo%\%UserProfileFrom% File". Press any key to continue.
