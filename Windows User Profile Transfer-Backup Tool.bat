@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup Tool
 echo Program Name: Windows User Profile Transfer/Backup Tool
-echo Version: 5.0.4
+echo Version: 5.0.5
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -36,7 +36,7 @@ if /i "%Start%"=="1" goto 1
 if /i "%Start%"=="2" goto 2
 if /i "%Start%"=="3" goto 3
 if /i "%Start%"=="4" goto Close
-echo Invalid Syntax!
+echo Invalid syntax!
 goto Start
 
 :1
@@ -74,7 +74,7 @@ set Sure=
 set /p Sure="This will overwrite files with the same name! (Yes/No) "
 if /i "%Sure%"=="Yes" goto HiddenSystem1
 if /i "%Sure%"=="No" goto Start
-echo Invalid Syntax
+echo Invalid syntax!
 goto Sure1
 
 :HiddenSytem1
@@ -83,7 +83,7 @@ set HiddenSystem=
 set /p HiddenSystem="This will not copy hidden and system files! Are you sure you want to continue? (Yes/No) "
 if /i "%HiddenSystem%"=="Yes" goto Copy1
 if /i "%HiddenSystem%"=="No" goto Start
-echo Invalid Syntax!
+echo Invalid syntax!
 goto HiddenSystem1
 
 :Copy1
@@ -136,7 +136,7 @@ set HiddenSystem=
 set /p HiddenSystem="This will not copy hidden and system files! Are you sure you want to continue? " (Yes/No)
 if /i "%HiddenSystem%"=="Yes" goto Copy2
 if /i "%HiddenSystem%"=="No" goto Start
-echo Invalid Syntax!
+echo Invalid syntax!
 goto HiddenSystem2
 
 :Copy2
@@ -185,7 +185,7 @@ set Sure=
 set /p Sure="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
 if /i "%Sure%"=="Yes" goto Copy3
 if /i "%Sure%"=="No" goto Start
-echo Invalid Syntax
+echo Invalid syntax!
 goto Sure3
 
 :Copy3
