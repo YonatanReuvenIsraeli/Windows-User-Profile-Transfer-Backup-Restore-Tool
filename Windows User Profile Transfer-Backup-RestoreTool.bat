@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 5.1.1
+echo Version: 5.1.2
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -168,7 +168,7 @@ goto Sure3
 
 :UserProfileToNotExist2
 echo.
-echo %UserProfileTo% does not exist! Please try again.
+echo "%UserProfileTo%" does not exist! Please try again.
 goto 3
 
 :Sure3
