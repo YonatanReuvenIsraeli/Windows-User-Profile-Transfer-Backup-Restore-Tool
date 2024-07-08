@@ -1,15 +1,13 @@
 @echo off
 setlocal
-title Windows User Profile Transfer/Backup Tool
-echo Program Name: Windows User Profile Transfer/Backup Tool
-echo Version: 5.0.7
+title Windows User Profile Transfer/Backup/Restore Tool
+echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
+echo Version: 5.1.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
 net session > nul 2>&1
 if not "%errorlevel%"=="0" goto NotAdministrator
-net user > nul 2>&1
-if not "%errorlevel%"=="0" goto WindowsRecoveryEnvironment
 goto Start
 
 :NotAdministrator
@@ -17,12 +15,6 @@ echo.
 echo Please run this batch file as an administrator. Press any key to close this batch file.
 pause > nul 2>&1
 goto Close
-
-:WindowsRecoveryEvironment
-echo.
-echo Please do not run this batch file from Windows Recovery Environment. Press any key to close this batch file.
-pause > nul 2>&1
-exit
 
 :Start
 echo.
@@ -168,7 +160,7 @@ echo "%File%" does not exist! You can try again.
 goto 3
 
 :UserProfileTo2
-net user
+echo.
 set UserProfileTo=
 set /p UserProfileTo="What is the user profile path that you want to transfer data to? "
 if not exist "%UserProfileTo%" goto UserProfileToNotExist2
@@ -202,7 +194,6 @@ goto Start
 echo.
 echo There has been an error! You can try again.
 goto 3
-
 :Close
 endlocal
 exit
