@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 5.1.3
+echo Version: 5.1.4
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -73,12 +73,12 @@ goto Sure1
 echo.
 set HiddenSystem=
 set /p HiddenSystem="This will not copy hidden and system files! Are you sure you want to continue? (Yes/No) "
-if /i "%HiddenSystem%"=="Yes" goto Copy1
+if /i "%HiddenSystem%"=="Yes" goto Transfer
 if /i "%HiddenSystem%"=="No" goto Start
 echo Invalid syntax!
 goto HiddenSystem1
 
-:Copy1
+:Transfer
 echo.
 echo Copying "%UserProfileFrom%" to "%UserProfileTo%".
 xcopy "%UserProfileFrom%\*.*" "%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
@@ -126,12 +126,12 @@ goto 2
 echo.
 set HiddenSystem=
 set /p HiddenSystem="This will not copy hidden and system files! Are you sure you want to continue? " (Yes/No)
-if /i "%HiddenSystem%"=="Yes" goto Copy2
+if /i "%HiddenSystem%"=="Yes" goto Backup
 if /i "%HiddenSystem%"=="No" goto Start
 echo Invalid syntax!
 goto HiddenSystem2
 
-:Copy2
+:Backup
 echo.
 echo Copying %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%UserProfileFrom% File"
@@ -175,12 +175,12 @@ goto 3
 echo.
 set Sure=
 set /p Sure="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
-if /i "%Sure%"=="Yes" goto Copy3
+if /i "%Sure%"=="Yes" goto Restore
 if /i "%Sure%"=="No" goto Start
 echo Invalid syntax!
 goto Sure3
 
-:Copy3
+:Restore
 echo.
 echo Copying "%File%" to %UserProfileTo%.
 xcopy "%File%\*.*" "%UserProfileTo%\*.*" /y /s /e /k /r /c /q > nul 2>&1
