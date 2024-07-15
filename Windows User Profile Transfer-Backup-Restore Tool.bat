@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 5.1.7
+echo Version: 5.1.8
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -183,7 +183,7 @@ goto Sure3
 :Restore
 echo.
 echo Restoring "%File%" to %UserProfileTo%.
-xcopy "%File%\*.*" "%UserProfileTo%\*.*" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%File%\*.*" "%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
 echo.
 echo User profile restore complete! Press any key to continue.
