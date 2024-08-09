@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 5.1.8
+echo Version: 5.1.9
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -110,7 +110,13 @@ echo.
 set FileTo=
 set /p FileTo="Where do you want to save the user profile "%UserProfileFrom%" to? "
 if not exist "%FileTo%" goto FileToNotExist
-if exist "%FileTo%\%UserProfileFrom% File" goto FileToFileExist
+goto BackupName
+
+:BackupName
+echo.
+set BackupName=
+set /p BackupName="What would you like the "%UserProfileFrom%" backup file to be named? "
+if exist "%FileTo%\%BackupName%" goto FileToFileExist
 goto HiddenSystem2
 
 :FileToNotExist
@@ -118,7 +124,7 @@ echo "%FileTo%" does not exist. Please try again.
 goto 2
 
 :FileToFileExist
-echo Please rename or move to another location "%FileTo%\%UserProfileFrom%" in order for this batch file to continue. Press any key to continue when you have renamed or moved  to another location "%FileTo%\%UserProfileFrom%".
+echo Please rename or move to another location "%FileTo%\%BackupName%" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%UserProfileFrom%".
 pause > nul 2>&1
 goto 2
 
@@ -134,11 +140,11 @@ goto HiddenSystem2
 :Backup
 echo.
 echo Backing up %UserProfileFrom% to "%FileTo%".
-md "%FileTo%\%UserProfileFrom% File"
-xcopy "%UserProfileFrom%\*.*" "%FileTo%\%UserProfileFrom% File" /y /s /e /k /r /c /q > nul 2>&1
+md "%FileTo%\%BackupName%"
+xcopy "%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 echo.
-echo %UserProfileFrom% backed up to "%FileTo%\%UserProfileFrom% File". Press any key to continue.
+echo %UserProfileFrom% backed up to "%FileTo%\%BackupName%". Press any key to continue.
 pause > nul 2>&1
 goto Start
 
