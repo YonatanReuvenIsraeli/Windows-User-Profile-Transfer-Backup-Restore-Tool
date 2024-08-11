@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 5.1.13
+echo Version: 5.1.14
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -161,14 +161,14 @@ goto 2
 
 :3
 echo.
-set File=
-set /p File="What is the full path to your copied user profile file? "
-if not exist "%File%" goto FileFromNotExist
+set FileFrom=
+set /p FileFrom="What is the full path to your copied user profile file? "
+if not exist "%FileFrom%" goto FileFromNotExist
 goto UserProfileTo2
 
 :FileFromNotExist
 echo.
-echo "%File%" does not exist! You can try again.
+echo "%FileFrom%" does not exist! You can try again.
 goto 3
 
 :UserProfileTo2
@@ -176,12 +176,18 @@ echo.
 set UserProfileTo=
 set /p UserProfileTo="What is the user profile path that you want to transfer data to? "
 if not exist "%UserProfileTo%" goto UserProfileToNotExist2
+if /i "%FileFrom%"=="%UserProfileTo%" goto Same3
 goto Sure3
 
 :UserProfileToNotExist2
 echo.
 echo "%UserProfileTo%" does not exist! Please try again.
 goto 3
+
+:Same3
+echo.
+echo "%FileFrom%" is the same as "%UserProfileTo%"! Please try again.
+goto 1
 
 :Sure3
 echo.
@@ -194,11 +200,11 @@ goto Sure3
 
 :Restore
 echo.
-echo Restoring "%File%" to "%UserProfileTo%".
-xcopy "%File%\*.*" "%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
+echo Restoring "%FileFrom%" to "%UserProfileTo%".
+xcopy "%FileFrom%\*.*" "%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
 echo.
-echo "%File%" restored to "%UserProfileTo%"! Press any key to continue.
+echo "%FileFrom%" restored to "%UserProfileTo%"! Press any key to continue.
 pause > nul 2>&1
 goto Start
 
