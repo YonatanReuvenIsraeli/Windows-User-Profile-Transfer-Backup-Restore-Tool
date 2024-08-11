@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.8
+echo Version: 6.0.9
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -88,7 +88,6 @@ echo.
 echo Transfering %UserProfileFrom% to %UserProfileTo%.
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error1
-echo.
 echo %UserProfileFrom% transfered to %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
 goto Start
@@ -156,7 +155,6 @@ echo Backing up %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%BackupName%"
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
-echo.
 echo %UserProfileFrom% backed up to %FileTo%\%BackupName%! Press any key to continue.
 pause > nul 2>&1
 goto Start
@@ -212,7 +210,6 @@ echo.
 echo Restoring "%FileFrom%" to %UserProfileTo%.
 xcopy "%FileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
-echo.
 echo %FileFrom% restored to %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
 goto Start
