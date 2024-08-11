@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 5.1.14
+echo Version: 5.1.15
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -32,6 +32,7 @@ echo Invalid syntax!
 goto Start
 
 :1
+echo.
 set UserProfileFrom=
 set /p UserProfileFrom="What is the user profile path you want to transfer data from? "
 if not exist "%UserProfileFrom%" goto UserProfileFromNotExist1
