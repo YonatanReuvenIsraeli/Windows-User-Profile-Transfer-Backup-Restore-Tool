@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.0
+echo Version: 6.0.1
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -68,7 +68,7 @@ goto 1
 :Sure1
 echo.
 set Sure=
-set /p Sure="This will overwrite files with the same name! (Yes/No) "
+set /p Sure="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
 if /i "%Sure%"=="Yes" goto HiddenSystem1
 if /i "%Sure%"=="No" goto Start
 echo Invalid syntax!
