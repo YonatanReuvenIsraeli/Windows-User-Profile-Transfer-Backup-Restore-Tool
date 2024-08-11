@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.2
+echo Version: 6.0.3
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -42,7 +42,7 @@ goto UserProfileTo1
 
 :UserProfileFromNotExist1
 echo.
-echo "%UserProfileFrom%" does not exist! Please try again.
+echo %UserProfileFrom% does not exist! Please try again.
 goto 1
 
 :UserProfileTo1
@@ -57,12 +57,12 @@ goto Sure1
 
 :UserProfileToNotExist1
 echo.
-echo "%UserProfileTo%" does not exist! Please try again.
+echo %UserProfileTo% does not exist! Please try again.
 goto 1
 
 :Same1
 echo.
-echo "%UserProfileFrom%" is the same as "%UserProfileTo%"! Please try again.
+echo %UserProfileFrom% is the same as %UserProfileTo%! Please try again.
 goto 1
 
 :Sure1
@@ -89,7 +89,7 @@ echo Transfering "%UserProfileFrom%" to "%UserProfileTo%".
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error1
 echo.
-echo "%UserProfileFrom%" transfered to "%UserProfileTo%"! Press any key to continue.
+echo %UserProfileFrom% transfered to %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
 goto Start
 
@@ -109,7 +109,7 @@ goto FileTo
 
 :UserProfileFromNotExist2
 echo.
-echo "%UserProfileFrom%" does not exist! Please try again.
+echo %UserProfileFrom% does not exist! Please try again.
 goto 2
 
 :FileTo
@@ -126,7 +126,7 @@ goto 2
 
 :Same2
 echo.
-echo "%UserProfileFrom%" is the same as "%FileTo%"! Please try again.
+echo "%UserProfileFrom%" is the same location as "%FileTo%"! Please try again.
 goto 1
 
 :FileToFileExist
@@ -137,7 +137,7 @@ goto 2
 :BackupName
 echo.
 set BackupName=
-set /p BackupName="What would you like the "%UserProfileFrom%" backup file to be named? "
+set /p BackupName="What would you like the %UserProfileFrom% backup file to be named? "
 if exist "%FileTo%\%BackupName%" goto FileToFileExist
 goto HiddenSystem2
 
@@ -157,7 +157,7 @@ md "%FileTo%\%BackupName%"
 xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 echo.
-echo "%UserProfileFrom%" backed up to "%FileTo%\%BackupName%"! Press any key to continue.
+echo %UserProfileFrom% backed up to %FileTo%\%BackupName%! Press any key to continue.
 pause > nul 2>&1
 goto Start
 
@@ -190,12 +190,12 @@ goto Sure3
 
 :UserProfileToNotExist2
 echo.
-echo "%UserProfileTo%" does not exist! Please try again.
+echo %UserProfileTo% does not exist! Please try again.
 goto 3
 
 :Same3
 echo.
-echo "%FileFrom%" is the same as "%UserProfileTo%"! Please try again.
+echo "%FileFrom%" is the same location as "%UserProfileTo%"! Please try again.
 goto 1
 
 :Sure3
@@ -213,7 +213,7 @@ echo Restoring "%FileFrom%" to "%UserProfileTo%".
 xcopy "%FileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
 echo.
-echo "%FileFrom%" restored to "%UserProfileTo%"! Press any key to continue.
+echo %FileFrom% restored to %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
 goto Start
 
@@ -221,7 +221,6 @@ goto Start
 echo.
 echo There has been an error! You can try again.
 goto 3
-
 :Close
 endlocal
 exit
