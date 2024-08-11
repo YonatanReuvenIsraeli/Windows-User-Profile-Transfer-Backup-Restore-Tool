@@ -126,8 +126,8 @@ goto 2
 
 :Same2
 echo.
-echo "%UserProfileFrom%" is the same location as "%FileTo%"! Please try again.
-goto 1
+echo %UserProfileFrom% is the same location as "%FileTo%"! Please try again.
+goto 2
 
 :BackupName
 echo.
@@ -137,7 +137,7 @@ if exist "%FileTo%\%BackupName%" goto FileToFileExist
 goto HiddenSystem2
 
 :FileToFileExist
-echo Please rename or move to another location "%FileTo%\%BackupName%" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%BackupName%".
+echo Please rename or move to another location "%FileTo%\%UserProfileFrom% Backup File" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%UserProfileFrom% Backup File".
 pause > nul 2>&1
 goto 2
 
@@ -169,7 +169,7 @@ goto 2
 :3
 echo.
 set FileFrom=
-set /p FileFrom="What is the full path to your copied user profile file? "
+set /p FileFrom="What is the full path to your backed up user profile file? "
 if not exist "%FileFrom%" goto FileFromNotExist
 goto UserProfileTo2
 
@@ -183,7 +183,7 @@ echo.
 dir "%SystemDrive%\Users" /b
 echo.
 set UserProfileTo=
-set /p UserProfileTo="What is the user profile that you want to transfer data to? "
+set /p UserProfileTo="What is the user profile that you want to restore data to? "
 if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileToNotExist2
 if /i "%FileFrom%"=="%SystemDrive%\Users\%UserProfileTo%" goto Same3
 goto Sure3
@@ -196,7 +196,7 @@ goto 3
 :Same3
 echo.
 echo "%FileFrom%" is the same location as "%UserProfileTo%"! Please try again.
-goto 1
+goto 3
 
 :Sure3
 echo.
