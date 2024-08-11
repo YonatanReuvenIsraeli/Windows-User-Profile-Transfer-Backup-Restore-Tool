@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.6
+echo Version: 6.0.7
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -115,7 +115,7 @@ goto 2
 :FileTo
 echo.
 set FileTo=
-set /p FileTo="Where do you want to save the user profile "%UserProfileFrom%" to? "
+set /p FileTo="Where do you want to save the user profile %UserProfileFrom% to? "
 if not exist "%FileTo%" goto FileToNotExist
 if /i "%SystemDrive%\Users\%UserProfileFrom%"=="%FileTo%" goto Same2
 goto BackupName
