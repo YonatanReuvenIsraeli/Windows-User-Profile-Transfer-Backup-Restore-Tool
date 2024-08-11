@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.5
+echo Version: 6.0.6
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -129,17 +129,17 @@ echo.
 echo "%UserProfileFrom%" is the same location as "%FileTo%"! Please try again.
 goto 1
 
-:FileToFileExist
-echo Please rename or move to another location "%FileTo%\%BackupName%" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%BackupName%".
-pause > nul 2>&1
-goto 2
-
 :BackupName
 echo.
 set BackupName=
 set /p BackupName="What would you like the %UserProfileFrom% backup file to be named? "
 if exist "%FileTo%\%BackupName%" goto FileToFileExist
 goto HiddenSystem2
+
+:FileToFileExist
+echo Please rename or move to another location "%FileTo%\%BackupName%" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%BackupName%".
+pause > nul 2>&1
+goto 2
 
 :HiddenSystem2
 echo.
