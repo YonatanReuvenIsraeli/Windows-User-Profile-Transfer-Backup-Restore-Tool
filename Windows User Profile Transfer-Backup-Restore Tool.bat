@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 5.1.15
+echo Version: 6.0.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -33,9 +33,11 @@ goto Start
 
 :1
 echo.
+dir "%SystemDrive%\Users" /b
+echo.
 set UserProfileFrom=
-set /p UserProfileFrom="What is the user profile path you want to transfer data from? "
-if not exist "%UserProfileFrom%" goto UserProfileFromNotExist1
+set /p UserProfileFrom="What is the user profile you want to transfer data from? "
+if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto UserProfileFromNotExist1
 goto UserProfileTo1
 
 :UserProfileFromNotExist1
@@ -45,10 +47,12 @@ goto 1
 
 :UserProfileTo1
 echo.
+dir "%SystemDrive%\Users" /b
+echo.
 set UserProfileTo=
 set /p UserProfileTo="What is the user profile path you want to transfer data to? "
-if not exist "%UserProfileTo%" goto UsePathToNotExist1
-if /i "%UserProfileFrom%"=="%UserProfileTo%" goto Same1
+if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UsePathToNotExist1
+if /i "%SystemDrive%\Users\%UserProfileFrom%"=="%SystemDrive%\Users\%UserProfileTo%" goto Same1
 goto Sure1
 
 :UserProfileToNotExist1
@@ -82,7 +86,7 @@ goto HiddenSystem1
 :Transfer
 echo.
 echo Transfering "%UserProfileFrom%" to "%UserProfileTo%".
-xcopy "%UserProfileFrom%\*.*" "%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error1
 echo.
 echo "%UserProfileFrom%" transfered to "%UserProfileTo%"! Press any key to continue.
@@ -96,9 +100,11 @@ goto 1
 
 :2
 echo.
+dir "%SystemDrive%\Users" /b
+echo.
 set UserProfileFrom=
-set /p UserProfileFrom="What is the user profile path to you want to transfer data from? "
-if not exist "%UserProfileFrom%" goto UseProfileFromNotExist2
+set /p UserProfileFrom="What is the user profile to you want to transfer data from? "
+if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto UseProfileFromNotExist2
 goto FileTo
 
 :UserProfileFromNotExist2
@@ -111,7 +117,7 @@ echo.
 set FileTo=
 set /p FileTo="Where do you want to save the user profile "%UserProfileFrom%" to? "
 if not exist "%FileTo%" goto FileToNotExist
-if /i "%UserProfileFrom%"=="%FileTo%" goto Same2
+if /i "%SystemDrive%\Users\%UserProfileFrom%"=="%FileTo%" goto Same2
 goto BackupName
 
 :FileToNotExist
@@ -148,7 +154,7 @@ goto HiddenSystem2
 echo.
 echo Backing up "%UserProfileFrom%" to "%FileTo%".
 md "%FileTo%\%BackupName%"
-xcopy "%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error2
 echo.
 echo "%UserProfileFrom%" backed up to "%FileTo%\%BackupName%"! Press any key to continue.
@@ -174,10 +180,12 @@ goto 3
 
 :UserProfileTo2
 echo.
+dir "%SystemDrive%\Users" /b
+echo.
 set UserProfileTo=
-set /p UserProfileTo="What is the user profile path that you want to transfer data to? "
-if not exist "%UserProfileTo%" goto UserProfileToNotExist2
-if /i "%FileFrom%"=="%UserProfileTo%" goto Same3
+set /p UserProfileTo="What is the user profile that you want to transfer data to? "
+if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileToNotExist2
+if /i "%FileFrom%"=="%SystemDrive%\Users\%UserProfileTo%" goto Same3
 goto Sure3
 
 :UserProfileToNotExist2
@@ -202,7 +210,7 @@ goto Sure3
 :Restore
 echo.
 echo Restoring "%FileFrom%" to "%UserProfileTo%".
-xcopy "%FileFrom%\*.*" "%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%FileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto Error3
 echo.
 echo "%FileFrom%" restored to "%UserProfileTo%"! Press any key to continue.
