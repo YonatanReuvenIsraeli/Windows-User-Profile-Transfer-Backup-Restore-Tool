@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 5.1.12
+echo Version: 5.1.13
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -47,7 +47,7 @@ echo.
 set UserProfileTo=
 set /p UserProfileTo="What is the user profile path you want to transfer data to? "
 if not exist "%UserProfileTo%" goto UsePathToNotExist1
-if "%UserProfileFrom%"=="%UserProfileTo%" goto SameUsers
+if /i "%UserProfileFrom%"=="%UserProfileTo%" goto Same1
 goto Sure1
 
 :UserProfileToNotExist1
@@ -55,7 +55,7 @@ echo.
 echo "%UserProfileTo%" does not exist! Please try again.
 goto 1
 
-:SameUsers
+:Same1
 echo.
 echo "%UserProfileFrom%" is the same as "%UserProfileTo%"! Please try again.
 goto 1
@@ -110,7 +110,22 @@ echo.
 set FileTo=
 set /p FileTo="Where do you want to save the user profile "%UserProfileFrom%" to? "
 if not exist "%FileTo%" goto FileToNotExist
+if /i "%UserProfileFrom%"=="%FileTo%" goto Same2
 goto BackupName
+
+:FileToNotExist
+echo "%FileTo%" does not exist. Please try again.
+goto 2
+
+:Same2
+echo.
+echo "%UserProfileFrom%" is the same as "%FileTo%"! Please try again.
+goto 1
+
+:FileToFileExist
+echo Please rename or move to another location "%FileTo%\%BackupName%" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%BackupName%".
+pause > nul 2>&1
+goto 2
 
 :BackupName
 echo.
@@ -118,15 +133,6 @@ set BackupName=
 set /p BackupName="What would you like the "%UserProfileFrom%" backup file to be named? "
 if exist "%FileTo%\%BackupName%" goto FileToFileExist
 goto HiddenSystem2
-
-:FileToNotExist
-echo "%FileTo%" does not exist. Please try again.
-goto 2
-
-:FileToFileExist
-echo Please rename or move to another location "%FileTo%\%BackupName%" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%BackupName%".
-pause > nul 2>&1
-goto 2
 
 :HiddenSystem2
 echo.
