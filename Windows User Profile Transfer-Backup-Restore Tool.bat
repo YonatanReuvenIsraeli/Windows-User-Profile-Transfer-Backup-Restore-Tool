@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.9
+echo Version: 6.0.10
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -53,7 +53,7 @@ set UserProfileTo=
 set /p UserProfileTo="What is the user profile path you want to transfer data to? "
 if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UsePathToNotExist1
 if /i "%SystemDrive%\Users\%UserProfileFrom%"=="%SystemDrive%\Users\%UserProfileTo%" goto Same1
-goto Sure1
+goto HiddenSystem1
 
 :UserProfileToNotExist1
 echo.
@@ -65,23 +65,23 @@ echo.
 echo %UserProfileFrom% is the same as %UserProfileTo%! Please try again.
 goto 1
 
+:HiddenSystem1
+echo.
+set HiddenSystem=
+set /p HiddenSystem="This will not transfer hidden and system files! Are you sure you want to continue? (Yes/No) "
+if /i "%HiddenSystem%"=="Yes" goto Sure1
+if /i "%HiddenSystem%"=="No" goto Start
+echo Invalid syntax!
+goto HiddenSystem1
+
 :Sure1
 echo.
 set Sure=
 set /p Sure="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
-if /i "%Sure%"=="Yes" goto HiddenSystem1
+if /i "%Sure%"=="Yes" goto Transfer
 if /i "%Sure%"=="No" goto Start
 echo Invalid syntax!
 goto Sure1
-
-:HiddenSystem1
-echo.
-set HiddenSystem=
-set /p HiddenSystem="This will not copy hidden and system files! Are you sure you want to continue? (Yes/No) "
-if /i "%HiddenSystem%"=="Yes" goto Transfer
-if /i "%HiddenSystem%"=="No" goto Start
-echo Invalid syntax!
-goto HiddenSystem1
 
 :Transfer
 echo.
@@ -143,7 +143,7 @@ goto 2
 :HiddenSystem2
 echo.
 set HiddenSystem=
-set /p HiddenSystem="This will not copy hidden and system files! Are you sure you want to continue? " (Yes/No)
+set /p HiddenSystem="This will not backup hidden and system files! Are you sure you want to continue? " (Yes/No)
 if /i "%HiddenSystem%"=="Yes" goto Backup
 if /i "%HiddenSystem%"=="No" goto Start
 echo Invalid syntax!
@@ -184,7 +184,7 @@ set UserProfileTo=
 set /p UserProfileTo="What is the user profile that you want to restore data to? "
 if not exist "%SystemDrive%\Users\%UserProfileTo%" goto UserProfileToNotExist2
 if /i "%FileFrom%"=="%SystemDrive%\Users\%UserProfileTo%" goto Same3
-goto Sure3
+goto HiddenSystem3
 
 :UserProfileToNotExist2
 echo.
@@ -195,6 +195,15 @@ goto 3
 echo.
 echo "%FileFrom%" is the same location as "%UserProfileTo%"! Please try again.
 goto 3
+
+:HiddenSystem3
+echo.
+set HiddenSystem=
+set /p HiddenSystem="This will not restore hidden and system files! Are you sure you want to continue? " (Yes/No)
+if /i "%HiddenSystem%"=="Yes" goto Sure3
+if /i "%HiddenSystem%"=="No" goto Start
+echo Invalid syntax!
+goto HiddenSystem3
 
 :Sure3
 echo.
