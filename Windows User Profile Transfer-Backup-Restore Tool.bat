@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.13
+echo Version: 6.0.12
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -32,6 +32,7 @@ echo Invalid syntax!
 goto "Start"
 
 :"1"
+echo.
 dir "%SystemDrive%\Users" /b
 echo.
 set UserProfileFrom=
@@ -44,6 +45,7 @@ echo %UserProfileFrom% does not exist! Please try again.
 goto "1"
 
 :"UserProfileTo1"
+echo.
 dir "%SystemDrive%\Users" /b
 echo.
 set UserProfileTo=
@@ -92,6 +94,7 @@ echo There has been an error! You can try again.
 goto "1"
 
 :"2"
+echo.
 dir "%SystemDrive%\Users" /b
 echo.
 set UserProfileFrom=
@@ -166,6 +169,7 @@ echo "%FileFrom%" does not exist! You can try again.
 goto "3"
 
 :"UserProfileTo2"
+echo.
 dir "%SystemDrive%\Users" /b
 echo.
 set UserProfileTo=
