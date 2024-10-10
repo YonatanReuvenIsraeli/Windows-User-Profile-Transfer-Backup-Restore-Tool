@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.15
+echo Version: 6.0.16
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -138,7 +138,7 @@ goto "2"
 :"HiddenSystem2"
 echo.
 set HiddenSystem=
-set /p HiddenSystem="This will not backup hidden and system files! Are you sure you want to continue? " (Yes/No)
+set /p HiddenSystem="This will not backup hidden and system files! Are you sure you want to continue? (Yes/No) "
 if /i "%HiddenSystem%"=="Yes" goto "Backup"
 if /i "%HiddenSystem%"=="No" goto "Start"
 echo Invalid syntax!
@@ -190,7 +190,7 @@ goto "3"
 :"HiddenSystem3"
 echo.
 set HiddenSystem=
-set /p HiddenSystem="This will not restore hidden and system files! Are you sure you want to continue? " (Yes/No)
+set /p HiddenSystem="This will not restore hidden and system files! Are you sure you want to continue? (Yes/No) "
 if /i "%HiddenSystem%"=="Yes" goto "Sure3"
 if /i "%HiddenSystem%"=="No" goto "Start"
 echo Invalid syntax!
