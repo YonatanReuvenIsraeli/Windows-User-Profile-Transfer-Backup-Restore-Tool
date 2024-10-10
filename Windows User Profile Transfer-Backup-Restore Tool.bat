@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.1.2
+echo Version: 6.1.3
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -176,10 +176,19 @@ goto "HiddenSystem1"
 echo.
 set Sure=
 set /p Sure="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
-if /i "%Sure%"=="Yes" goto "Transfer"
+if /i "%Sure%"=="Yes" goto "TransferCheck"
 if /i "%Sure%"=="No" goto "Start"
 echo Invalid syntax!
 goto "Sure1"
+
+:"TransferCheck"
+echo.
+set Check=
+set /p Check="There is no going back after this! Are you sure you want to transfer %UserProfileFrom% to %UserProfileTo%? (Yes/No) "
+if /i "%Check%"=="Yes" goto "Transfer"
+if /i "%Check%"=="No" goto "Start"
+echo Invalid syntax!
+goto "TransferCheck"
 
 :"Transfer"
 echo.
@@ -289,10 +298,19 @@ goto "2"
 echo.
 set HiddenSystem=
 set /p HiddenSystem="This will not backup hidden and system files! Are you sure you want to continue? (Yes/No) "
-if /i "%HiddenSystem%"=="Yes" goto "Backup"
+if /i "%HiddenSystem%"=="Yes" goto "BackupCheck"
 if /i "%HiddenSystem%"=="No" goto "Start"
 echo Invalid syntax!
 goto "HiddenSystem2"
+
+:"BackupCheck"
+echo.
+set Check=
+set /p Check="There is no going back after this! Are you sure you want to backup %UserProfileFrom% to "%FileTo%"? (Yes/No) "
+if /i "%Check%"=="Yes" goto "Backup"
+if /i "%Check%"=="No" goto "Start"
+echo Invalid syntax!
+goto "BackupCheck"
 
 :"Backup"
 echo.
@@ -400,10 +418,19 @@ goto "HiddenSystem3"
 echo.
 set Sure=
 set /p Sure="This will overwrite files with the same name! Are you sure you want to continue? (Yes/No) "
-if /i "%Sure%"=="Yes" goto "Restore"
+if /i "%Sure%"=="Yes" goto "RestoreCheck"
 if /i "%Sure%"=="No" goto "Start"
 echo Invalid syntax!
 goto "Sure3"
+
+:"RestoreCheck"
+echo.
+set Check=
+set /p Check="There is no going back after this! Are you sure you want to restore "%FileFrom%" to %UserProfileTo%? (Yes/No) "
+if /i "%Check%"=="Yes" goto "Restore"
+if /i "%Check%"=="No" goto "Start"
+echo Invalid syntax!
+goto "RestoreCheck"
 
 :"Restore"
 echo.
