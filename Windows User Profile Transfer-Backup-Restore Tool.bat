@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.0.16
+echo Version: 6.1.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -25,34 +25,134 @@ echo [4] Exit.
 echo.
 set Start=
 set /p Start=" What would you like to do? (1-4) "
-if /i "%Start%"=="1" goto "1"
-if /i "%Start%"=="2" goto "2"
+if /i "%Start%"=="1" goto "DriveLetterFrom"
+if /i "%Start%"=="2" goto "DriveLetterBackup"
 if /i "%Start%"=="3" goto "3"
 if /i "%Start%"=="4" goto "Close"
 echo Invalid syntax!
 goto "Start"
 
+:"DriveLetterFrom"
+echo.
+set DriveLetterFrom=
+set /p DriveLetterFrom="What is the drive letter of your Windows installation you want to transfer a user profile from? (A:-Z:) "
+if /i "%DriveLetterFrom%"=="A:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="B:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="C:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="D:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="E:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="F:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="G:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="H:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="I:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="J:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="K:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="L:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="M:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="N:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="O:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="P:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="Q:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="R:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="S:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="T:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="U:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="V:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="W:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="X:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="Y:" goto "SureDriveLetterFrom"
+if /i "%DriveLetterFrom%"=="Z:" goto "SureDriveLetterFrom"
+echo Invalid syntax!
+goto "DriveLetterFrom"
+
+:"SureDriveLetterFrom"
+echo.
+set SureDriveLetterFrom=
+set /p SureDriveLetterFrom="Are you sure "%DriveLetterFrom%" is the drive letter of your Windows installation you want to transfer a user profile from? (Yes/No) "
+if /i "%SureDriveLetterFrom%"=="Yes" goto "CheckExistDriveLetterFrom"
+if /i "%SureDriveLetterFrom%"=="No" goto "DriveLetterFrom"
+echo Invalid syntax!
+goto "SureDriveLetterFrom"
+
+:"CheckExistDriveLetterFrom"
+if not exist "%DriveLetterFrom%" goto "NotExistFrom"
+goto "1"
+
+:"NotExistFrom"
+echo "%DriveLetter%" does not exist. Please try again.
+goto "DriveLetterFrom"
+
 :"1"
 echo.
-dir "%SystemDrive%\Users" /b
+dir "%DriveLetter%\Users" /b
 echo.
 set UserProfileFrom=
 set /p UserProfileFrom="What is the user profile you want to transfer data from? "
-if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto "UserProfileFromNotExist1"
-goto "UserProfileTo1"
+if not exist "%DriveLetter%\Users\%UserProfileFrom%" goto "UserProfileFromNotExist1"
+goto "DriveLetterTo"
 
 :"UserProfileFromNotExist1"
 echo %UserProfileFrom% does not exist! Please try again.
 goto "1"
 
+:"DriveLetterTo"
+echo.
+set DriveLetterTo=
+set /p DriveLetterTo="What is the drive letter of your Windows installation you want to transfer a user profile to? (A:-Z:) "
+if /i "%DriveLetterTo%"=="A:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="B:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="C:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="D:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="E:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="F:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="G:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="H:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="I:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="J:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="K:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="L:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="M:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="N:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="O:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="P:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="Q:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="R:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="S:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="T:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="U:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="V:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="W:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="X:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="Y:" goto "SureDriveLetterTo"
+if /i "%DriveLetterTo%"=="Z:" goto "SureDriveLetterTo"
+echo Invalid syntax!
+goto "DriveLetterTo"
+
+:"SureDriveLetterTo"
+echo.
+set SureDriveLetterTo=
+set /p SureDriveLetterTo="Are you sure "%DriveLetterTo%" is the drive letter of your Windows installation you want to transfer a user profile to? (Yes/No) "
+if /i "%SureDriveLetterTo%"=="Yes" goto "CheckExistDriveLetterTo"
+if /i "%SureDriveLetterTo%"=="No" goto "DriveLetterTo"
+echo Invalid syntax!
+goto "SureDriveLetterTo"
+
+:"CheckExistDriveLetterTo"
+if not exist "%DriveLetterTo%" goto "NotExistTo"
+goto "UserProfileTo1"
+
+:"NotExistTo"
+echo "%DriveLetterTo%" does not exist. Please try again.
+goto "DriveLetterTo"
+
 :"UserProfileTo1"
 echo.
-dir "%SystemDrive%\Users" /b
+dir "%DriveLetterTo%\Users" /b
 echo.
 set UserProfileTo=
 set /p UserProfileTo="What is the user profile you want to transfer data to? "
-if not exist "%SystemDrive%\Users\%UserProfileTo%" goto "UsePathToNotExist1"
-if /i "%SystemDrive%\Users\%UserProfileFrom%"=="%SystemDrive%\Users\%UserProfileTo%" goto "Same1"
+if not exist "%DriveLetterTo%\Users\%UserProfileTo%" goto "UsePathToNotExist1"
+if /i "%DriveLetterTo%\Users\%UserProfileFrom%"=="%DriveLetterFrom%\Users\%UserProfileTo%" goto "Same1"
 goto "HiddenSystem1"
 
 :"UserProfileToNotExist1"
@@ -60,8 +160,8 @@ echo %UserProfileTo% does not exist! Please try again.
 goto "1"
 
 :"Same1"
-echo %UserProfileFrom% is the same as %UserProfileTo%! Please try again.
-goto "1"
+echo Drive letter "%DriveLetterFrom%" and user %UserProfileFrom% is the same as drive letter "%DriveLetterTo%" and user %UserProfileTo%! Please try again.
+goto "DriveLetterFrom"
 
 :"HiddenSystem1"
 echo.
@@ -84,7 +184,7 @@ goto "Sure1"
 :"Transfer"
 echo.
 echo Transfering %UserProfileFrom% to %UserProfileTo%.
-xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "Error1"
 echo %UserProfileFrom% transfered to %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
@@ -92,15 +192,65 @@ goto "Start"
 
 :"Error1"
 echo There has been an error! You can try again.
-goto "1"
+goto "DriveLetterFrom"
+
+:"DriveLetterBackup"
+echo.
+set DriveLetterBackup=
+set /p DriveLetterBackup="What is the drive letter of your Windows installation you want to backup a user profile from? (A:-Z:) "
+if /i "%DriveLetterBackup%"=="A:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="B:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="C:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="D:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="E:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="F:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="G:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="H:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="I:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="J:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="K:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="L:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="M:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="N:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="O:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="P:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="Q:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="R:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="S:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="T:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="U:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="V:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="W:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="X:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="Y:" goto "SureDriveLetterBackup"
+if /i "%DriveLetterBackup%"=="Z:" goto "SureDriveLetterBackup"
+echo Invalid syntax!
+goto "DriveLetterBackup"
+
+:"SureDriveLetterBackup"
+echo.
+set SureDriveLetterBackup=
+set /p SureDriveLetterBackup="Are you sure "%DriveLetterBackup%" is the drive letter of your Windows installation you want to backup a user profile from? (Yes/No) "
+if /i "%SureDriveLetterBackup%"=="Yes" goto "CheckExistDriveLetterBackup"
+if /i "%SureDriveLetterBackup%"=="No" goto "DriveLetterBackup"
+echo Invalid syntax!
+goto "SureDriveLetterBackup"
+
+:"CheckExistDriveLetterBackup"
+if not exist "%DriveLetterBackup%" goto "NotExistBackup"
+goto "2"
+
+:"NotExistBackup"
+echo "%DriveLetter%" does not exist. Please try again.
+goto "DriveLetterBackup"
 
 :"2"
 echo.
-dir "%SystemDrive%\Users" /b
+dir "%DriveLetterBackup%\Users" /b
 echo.
 set UserProfileFrom=
-set /p UserProfileFrom="What is the user profile to you want to transfer data from? "
-if not exist "%SystemDrive%\Users\%UserProfileFrom%" goto "UseProfileFromNotExist2"
+set /p UserProfileFrom="What is the user profile to you want to backup data from? "
+if not exist "%DriveLetterBackup%\Users\%UserProfileFrom%" goto "UseProfileFromNotExist2"
 goto "FileTo"
 
 :"UserProfileFromNotExist2"
@@ -112,7 +262,7 @@ echo.
 set FileTo=
 set /p FileTo="Where do you want to save the user profile %UserProfileFrom% to? "
 if not exist "%FileTo%" goto "FileToNotExist"
-if /i "%SystemDrive%\Users\%UserProfileFrom%"=="%FileTo%" goto "Same2"
+if /i "%DriveLetterBackup%\Users\%UserProfileFrom%"=="%FileTo%" goto "Same2"
 goto "BackupName"
 
 :"FileToNotExist"
@@ -148,7 +298,7 @@ goto "HiddenSystem2"
 echo.
 echo Backing up %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%BackupName%"
-xcopy "%SystemDrive%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "Error2"
 echo %UserProfileFrom% backed up to %FileTo%\%BackupName%! Press any key to continue.
 pause > nul 2>&1
@@ -156,22 +306,72 @@ goto "Start"
 
 :"Error2"
 echo There has been an error! You can try again.
-goto "2"
+goto "DriveLetterBackup"
 
 :"3"
 echo.
 set FileFrom=
 set /p FileFrom="What is the full path to your backed up user profile file? "
 if not exist "%FileFrom%" goto "FileFromNotExist"
-goto "UserProfileTo2"
+goto "DriveLetterRestore"
 
 :"FileFromNotExist"
 echo "%FileFrom%" does not exist! You can try again.
 goto "3"
 
+:"DriveLetterRestore"
+echo.
+set DriveLetterRestore=
+set /p DriveLetterRestore="What is the drive letter of your Windows installation you want to restore a user profile from? (A:-Z:) "
+if /i "%DriveLetterRestore%"=="A:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="B:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="C:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="D:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="E:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="F:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="G:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="H:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="I:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="J:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="K:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="L:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="M:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="N:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="O:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="P:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="Q:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="R:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="S:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="T:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="U:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="V:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="W:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="X:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="Y:" goto "SureDriveLetterRestore"
+if /i "%DriveLetterRestore%"=="Z:" goto "SureDriveLetterRestore"
+echo Invalid syntax!
+goto "DriveLetterRestore"
+
+:"SureDriveLetterRestore"
+echo.
+set SureDriveLetterRestore=
+set /p SureDriveLetterRestore="Are you sure "%DriveLetterRestore%" is the drive letter of your Windows installation you want to restore a user profile from? (Yes/No) "
+if /i "%SureDriveLetterRestore%"=="Yes" goto "CheckExistDriveLetterRestore"
+if /i "%SureDriveLetterRestore%"=="No" goto "DriveLetterRestore"
+echo Invalid syntax!
+goto "SureDriveLetterRestore"
+
+:"CheckExistDriveLetterRestore"
+if not exist "%DriveLetterRestore%" goto "NotExistRestore"
+goto "UserProfileTo2"
+
+:"NotExistRestore"
+echo "%DriveLetter%" does not exist. Please try again.
+goto "DriveLetterRestore"
+
 :"UserProfileTo2"
 echo.
-dir "%SystemDrive%\Users" /b
+dir "%DriveLetterRestore%\Users" /b
 echo.
 set UserProfileTo=
 set /p UserProfileTo="What is the user profile that you want to restore data to? "
@@ -208,7 +408,7 @@ goto "Sure3"
 :"Restore"
 echo.
 echo Restoring "%FileFrom%" to %UserProfileTo%.
-xcopy "%FileFrom%\*.*" "%SystemDrive%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "Error3"
 echo %FileFrom% restored to %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
