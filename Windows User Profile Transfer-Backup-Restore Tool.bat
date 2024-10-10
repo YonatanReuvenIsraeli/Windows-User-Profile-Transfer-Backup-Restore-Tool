@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.1.3
+echo Version: 6.1.4
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -184,7 +184,7 @@ goto "Sure1"
 :"TransferCheck"
 echo.
 set Check=
-set /p Check="There is no going back after this! Are you sure you want to transfer %UserProfileFrom% to %UserProfileTo%? (Yes/No) "
+set /p Check="There is no going back after this! Are you sure you want to transfer drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%? (Yes/No) "
 if /i "%Check%"=="Yes" goto "Transfer"
 if /i "%Check%"=="No" goto "Start"
 echo Invalid syntax!
@@ -192,10 +192,10 @@ goto "TransferCheck"
 
 :"Transfer"
 echo.
-echo Transfering %UserProfileFrom% to %UserProfileTo%.
+echo Transfering drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%.
 xcopy "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "Error1"
-echo %UserProfileFrom% transfered to %UserProfileTo%! Press any key to continue.
+echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transfered to drive letter "%DriveLetterTo%" user %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -306,7 +306,7 @@ goto "HiddenSystem2"
 :"BackupCheck"
 echo.
 set Check=
-set /p Check="There is no going back after this! Are you sure you want to backup %UserProfileFrom% to "%FileTo%"? (Yes/No) "
+set /p Check="There is no going back after this! Are you sure you want to backup drive letter "%DriveLetterBackup%" to "%FileTo%"? (Yes/No) "
 if /i "%Check%"=="Yes" goto "Backup"
 if /i "%Check%"=="No" goto "Start"
 echo Invalid syntax!
@@ -314,11 +314,11 @@ goto "BackupCheck"
 
 :"Backup"
 echo.
-echo Backing up %UserProfileFrom% to "%FileTo%".
+echo Backing up drive letter "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%BackupName%"
 xcopy "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "Error2"
-echo %UserProfileFrom% backed up to %FileTo%\%BackupName%! Press any key to continue.
+echo Drive letter "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -393,8 +393,8 @@ dir "%DriveLetterRestore%\Users" /b
 echo.
 set UserProfileTo=
 set /p UserProfileTo="What is the user profile that you want to restore data to? "
-if not exist "%SystemDrive%\Users\%UserProfileTo%" goto "UserProfileToNotExist2"
-if /i "%FileFrom%"=="%SystemDrive%\Users\%UserProfileTo%" goto "Same3"
+if not exist "%DriveLetterRestore%\Users\%UserProfileTo%" goto "UserProfileToNotExist2"
+if /i "%FileFrom%"=="%DriveLetterRestore%\Users\%UserProfileTo%" goto "Same3"
 goto "HiddenSystem3"
 
 :"UserProfileToNotExist2"
@@ -426,7 +426,7 @@ goto "Sure3"
 :"RestoreCheck"
 echo.
 set Check=
-set /p Check="There is no going back after this! Are you sure you want to restore "%FileFrom%" to %UserProfileTo%? (Yes/No) "
+set /p Check="There is no going back after this! Are you sure you want to restore "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%? (Yes/No) "
 if /i "%Check%"=="Yes" goto "Restore"
 if /i "%Check%"=="No" goto "Start"
 echo Invalid syntax!
@@ -434,10 +434,10 @@ goto "RestoreCheck"
 
 :"Restore"
 echo.
-echo Restoring "%FileFrom%" to %UserProfileTo%.
+echo Restoring "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%.
 xcopy "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "Error3"
-echo %FileFrom% restored to %UserProfileTo%! Press any key to continue.
+echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
