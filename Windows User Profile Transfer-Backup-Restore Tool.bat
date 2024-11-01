@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.1.7
+echo Version: 6.1.8
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -388,7 +388,7 @@ goto "DriveLetterRestore"
 :"SureDriveLetterRestore"
 echo.
 set SureDriveLetterRestore=
-set /p SureDriveLetterRestore="Are you sure "%DriveLetterRestore%" is the drive letter of your Windows installation you want to restore a user profile from? (Yes/No) "
+set /p SureDriveLetterRestore="Are you sure "%DriveLetterRestore%" is the drive letter of your Windows installation you want to restore a user profile to? (Yes/No) "
 if /i "%SureDriveLetterRestore%"=="Yes" goto "CheckExistDriveLetterRestore"
 if /i "%SureDriveLetterRestore%"=="No" goto "DriveLetterRestore"
 echo Invalid syntax!
