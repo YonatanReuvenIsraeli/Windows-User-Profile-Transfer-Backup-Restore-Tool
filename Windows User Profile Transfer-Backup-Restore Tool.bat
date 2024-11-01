@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.1.5
+echo Version: 6.1.6
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -83,6 +83,7 @@ echo "%DriveLetterFrom%" does not exist. Please try again.
 goto "DriveLetterFrom"
 
 :"1"
+if not exist "%DriveLetterFrom%\Users" goto "TransferFromNotExist"
 echo.
 dir "%DriveLetterFrom%\Users" /b
 echo.
@@ -90,6 +91,10 @@ set UserProfileFrom=
 set /p UserProfileFrom="What is the user profile you want to transfer data from? "
 if not exist "%DriveLetterFrom%\Users\%UserProfileFrom%" goto "UserProfileFromNotExist1"
 goto "DriveLetterTo"
+
+:"TransferFromNotExist"
+echo "%DriveLetterFrom%" is not a Windows installation! Please try again.
+goto "DriveLetterFrom"
 
 :"UserProfileFromNotExist1"
 echo %UserProfileFrom% does not exist! Please try again.
@@ -146,6 +151,7 @@ echo "%DriveLetterTo%" does not exist. Please try again.
 goto "DriveLetterTo"
 
 :"UserProfileTo1"
+if not exist "%DriveLetterTo%\Users" goto "TransferToNotExist"
 echo.
 dir "%DriveLetterTo%\Users" /b
 echo.
@@ -154,6 +160,10 @@ set /p UserProfileTo="What is the user profile you want to transfer data to? "
 if not exist "%DriveLetterTo%\Users\%UserProfileTo%" goto "UserProfileToNotExist1"
 if /i "%DriveLetterTo%\Users\%UserProfileFrom%"=="%DriveLetterFrom%\Users\%UserProfileTo%" goto "Same1"
 goto "HiddenSystem1"
+
+:"TransferToNotExist"
+echo "%DriveLetterTo%" is not a Windows installation! Please try again.
+goto "DriveLetterTo"
 
 :"UserProfileToNotExist1"
 echo %UserProfileTo% does not exist! Please try again.
@@ -254,6 +264,7 @@ echo "%DriveLetterBackup%" does not exist. Please try again.
 goto "DriveLetterBackup"
 
 :"2"
+if not exist "%DriveLetterBackup%\Users" goto "BackupNotExist"
 echo.
 dir "%DriveLetterBackup%\Users" /b
 echo.
@@ -261,6 +272,10 @@ set UserProfileFrom=
 set /p UserProfileFrom="What is the user profile to you want to backup data from? "
 if not exist "%DriveLetterBackup%\Users\%UserProfileFrom%" goto "UseProfileFromNotExist2"
 goto "FileTo"
+
+:"BackupNotExist"
+echo "%DriveLetterBackup%" is not a Windows installation! Please try again.
+goto "DriveLetterBackup"
 
 :"UserProfileFromNotExist2"
 echo %UserProfileFrom% does not exist! Please try again.
@@ -388,6 +403,7 @@ echo "%DriveLetterRestore%" does not exist. Please try again.
 goto "DriveLetterRestore"
 
 :"UserProfileTo2"
+if not exist "%DriveLetterRestore%\Users" goto "RestoreNotExist"
 echo.
 dir "%DriveLetterRestore%\Users" /b
 echo.
@@ -396,6 +412,10 @@ set /p UserProfileTo="What is the user profile that you want to restore data to?
 if not exist "%DriveLetterRestore%\Users\%UserProfileTo%" goto "UserProfileToNotExist2"
 if /i "%FileFrom%"=="%DriveLetterRestore%\Users\%UserProfileTo%" goto "Same3"
 goto "HiddenSystem3"
+
+:"RestoreNotExist"
+echo "%DriveLetterRestore%" is not a Windows installation! Please try again.
+goto "DriveLetterRestore"
 
 :"UserProfileToNotExist2"
 echo %UserProfileTo% does not exist! Please try again.
