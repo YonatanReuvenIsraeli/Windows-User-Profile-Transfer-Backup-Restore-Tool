@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.1.4
+echo Version: 6.1.5
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -79,16 +79,16 @@ if not exist "%DriveLetterFrom%" goto "NotExistFrom"
 goto "1"
 
 :"NotExistFrom"
-echo "%DriveLetter%" does not exist. Please try again.
+echo "%DriveLetterFrom%" does not exist. Please try again.
 goto "DriveLetterFrom"
 
 :"1"
 echo.
-dir "%DriveLetter%\Users" /b
+dir "%DriveLetterFrom%\Users" /b
 echo.
 set UserProfileFrom=
 set /p UserProfileFrom="What is the user profile you want to transfer data from? "
-if not exist "%DriveLetter%\Users\%UserProfileFrom%" goto "UserProfileFromNotExist1"
+if not exist "%DriveLetterFrom%\Users\%UserProfileFrom%" goto "UserProfileFromNotExist1"
 goto "DriveLetterTo"
 
 :"UserProfileFromNotExist1"
@@ -250,7 +250,7 @@ if not exist "%DriveLetterBackup%" goto "NotExistBackup"
 goto "2"
 
 :"NotExistBackup"
-echo "%DriveLetter%" does not exist. Please try again.
+echo "%DriveLetterBackup%" does not exist. Please try again.
 goto "DriveLetterBackup"
 
 :"2"
@@ -384,7 +384,7 @@ if not exist "%DriveLetterRestore%" goto "NotExistRestore"
 goto "UserProfileTo2"
 
 :"NotExistRestore"
-echo "%DriveLetter%" does not exist. Please try again.
+echo "%DriveLetterRestore%" does not exist. Please try again.
 goto "DriveLetterRestore"
 
 :"UserProfileTo2"
