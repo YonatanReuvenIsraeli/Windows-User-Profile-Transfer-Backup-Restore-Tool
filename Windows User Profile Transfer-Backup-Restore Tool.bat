@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.1.9
+echo Version: 6.1.10
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -103,7 +103,7 @@ goto "1"
 :"SureUserProfileFrom"
 echo.
 set SureUserProfileFrom=
-set /p SureUserProfileFrom="Are you sure "%UserProfileFrom%" is the user profile you want to transfer data from? (Yes/No) "
+set /p SureUserProfileFrom="Are you sure %UserProfileFrom%is the user profile you want to transfer data from? (Yes/No) "
 if /i "%SureUserProfileFrom%"=="Yes" goto "DriveLetterTo"
 if /i "%SureUserProfileFrom%"=="No" goto "DriveLetterFrom"
 echo Invalid syntax!
@@ -185,7 +185,7 @@ goto "DriveLetterFrom"
 :"SureUserProfileTo1"
 echo.
 set SureUserProfileTo=
-set /p SureUserProfileTo="Are you sure "%UserProfileTo%" is the user profile you want to transfer data to? (Yes/No) "
+set /p SureUserProfileTo="Are you sure %UserProfileTo% is the user profile you want to transfer data to? (Yes/No) "
 if /i "%SureUserProfileTo%"=="Yes" goto "HiddenSystem1"
 if /i "%SureUserProfileTo%"=="No" goto "DriveLetterTo"
 echo Invalid syntax!
@@ -302,7 +302,7 @@ goto "2"
 :"SureBackup"
 echo.
 set SureBackup=
-set /p SureBackup="Are you sure "%UserProfileFrom%" is the user profile you want to backup data from? (Yes/No) "
+set /p SureBackup="Are you sure %UserProfileFrom% is the user profile you want to backup data from? (Yes/No) "
 if /i "%SureBackup%"=="Yes" goto "FileTo"
 if /i "%SureBackup%"=="No" goto "DriveLetterBackup"
 echo Invalid syntax!
@@ -339,7 +339,7 @@ goto "2"
 :"SureFileTo"
 echo.
 set SureFileTo=
-set /p SureFileTo="Are you sure "%FileTo%\%BackupName%" is the where you want to backup user profile %UserProfileFrom% to? (Yes/No) "
+set /p SureFileTo="Are you sure "%FileTo%\%BackupName%" is the where you want to backup to? (Yes/No) "
 if /i "%SureFileTo%"=="Yes" goto "HiddenSystem2"
 if /i "%SureFileTo%"=="No" goto "FileTo"
 echo Invalid syntax!
@@ -473,7 +473,7 @@ goto "3"
 :"SureUserProfileTo2"
 echo.
 set SureUserProfileTo=
-set /p SureUserProfileTo="Are you sure "%FileTo%\%BackupName%" is the where you want to backup user profile %UserProfileFrom% to? (Yes/No) "
+set /p SureUserProfileTo="Are you sure %UserProfileTo% is the where you want to backup user profile %UserProfileFrom% to? (Yes/No) "
 if /i "%SureUserProfileTo%"=="Yes" goto "HiddenSystem3"
 if /i "%SureUserProfileTo%"=="No" goto "DriveLetterRestore"
 echo Invalid syntax!
