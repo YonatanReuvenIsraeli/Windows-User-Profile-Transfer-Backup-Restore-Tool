@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.1.8
+echo Version: 6.1.9
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -90,7 +90,7 @@ echo.
 set UserProfileFrom=
 set /p UserProfileFrom="What is the user profile you want to transfer data from? "
 if not exist "%DriveLetterFrom%\Users\%UserProfileFrom%" goto "UserProfileFromNotExist1"
-goto "DriveLetterTo"
+goto "SureUserProfileFrom"
 
 :"TransferFromNotExist"
 echo "%DriveLetterFrom%" is not a Windows installation! Please try again.
@@ -99,6 +99,15 @@ goto "DriveLetterFrom"
 :"UserProfileFromNotExist1"
 echo %UserProfileFrom% does not exist! Please try again.
 goto "1"
+
+:"SureUserProfileFrom"
+echo.
+set SureUserProfileFrom=
+set /p SureUserProfileFrom="Are you sure "%UserProfileFrom%" is the user profile you want to transfer data from? (Yes/No) "
+if /i "%SureUserProfileFrom%"=="Yes" goto "DriveLetterTo"
+if /i "%SureUserProfileFrom%"=="No" goto "DriveLetterFrom"
+echo Invalid syntax!
+goto "SureUserProfileFrom"
 
 :"DriveLetterTo"
 echo.
@@ -159,7 +168,7 @@ set UserProfileTo=
 set /p UserProfileTo="What is the user profile you want to transfer data to? "
 if not exist "%DriveLetterTo%\Users\%UserProfileTo%" goto "UserProfileToNotExist1"
 if /i "%DriveLetterTo%\Users\%UserProfileFrom%"=="%DriveLetterFrom%\Users\%UserProfileTo%" goto "Same1"
-goto "HiddenSystem1"
+goto "SureUserProfileTo1"
 
 :"TransferToNotExist"
 echo "%DriveLetterTo%" is not a Windows installation! Please try again.
@@ -172,6 +181,15 @@ goto "1"
 :"Same1"
 echo Drive letter "%DriveLetterFrom%" and user %UserProfileFrom% is the same as drive letter "%DriveLetterTo%" and user %UserProfileTo%! Please try again.
 goto "DriveLetterFrom"
+
+:"SureUserProfileTo1"
+echo.
+set SureUserProfileTo=
+set /p SureUserProfileTo="Are you sure "%UserProfileTo%" is the user profile you want to transfer data to? (Yes/No) "
+if /i "%SureUserProfileTo%"=="Yes" goto "HiddenSystem1"
+if /i "%SureUserProfileTo%"=="No" goto "DriveLetterTo"
+echo Invalid syntax!
+goto "SureUserProfileTo1"
 
 :"HiddenSystem1"
 echo.
@@ -271,7 +289,7 @@ echo.
 set UserProfileFrom=
 set /p UserProfileFrom="What is the user profile to you want to backup data from? "
 if not exist "%DriveLetterBackup%\Users\%UserProfileFrom%" goto "UseProfileFromNotExist2"
-goto "FileTo"
+goto "SureBackup"
 
 :"BackupNotExist"
 echo "%DriveLetterBackup%" is not a Windows installation! Please try again.
@@ -280,6 +298,15 @@ goto "DriveLetterBackup"
 :"UserProfileFromNotExist2"
 echo %UserProfileFrom% does not exist! Please try again.
 goto "2"
+
+:"SureBackup"
+echo.
+set SureBackup=
+set /p SureBackup="Are you sure "%UserProfileFrom%" is the user profile you want to backup data from? (Yes/No) "
+if /i "%SureBackup%"=="Yes" goto "FileTo"
+if /i "%SureBackup%"=="No" goto "DriveLetterBackup"
+echo Invalid syntax!
+goto "SureBackup"
 
 :"FileTo"
 echo.
@@ -302,12 +329,21 @@ echo.
 set BackupName=
 set /p BackupName="What would you like the %UserProfileFrom% backup file to be named? "
 if exist "%FileTo%\%BackupName%" goto "FileToFileExist"
-goto "HiddenSystem2"
+goto "SureFileTo"
 
 :"FileToFileExist"
 echo Please rename or move to another location "%FileTo%\%UserProfileFrom% Backup File" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%UserProfileFrom% Backup File".
 pause > nul 2>&1
 goto "2"
+
+:"SureFileTo"
+echo.
+set SureFileTo=
+set /p SureFileTo="Are you sure "%FileTo%\%BackupName%" is the where you want to backup user profile %UserProfileFrom% to? (Yes/No) "
+if /i "%SureFileTo%"=="Yes" goto "HiddenSystem2"
+if /i "%SureFileTo%"=="No" goto "FileTo"
+echo Invalid syntax!
+goto "SureFileName"
 
 :"HiddenSystem2"
 echo.
@@ -346,11 +382,20 @@ echo.
 set FileFrom=
 set /p FileFrom="What is the full path to your backed up user profile file? "
 if not exist "%FileFrom%" goto "FileFromNotExist"
-goto "DriveLetterRestore"
+goto "SureFileFrom"
 
 :"FileFromNotExist"
 echo "%FileFrom%" does not exist! You can try again.
 goto "3"
+
+:"SureFileFrom"
+echo.
+set SureFileFrom=
+set /p SureFileFrom="Are you sure "%FileFrom%" is the full path to your backed up user profile file? (Yes/No) "
+if /i "%SureFileFrom%"=="Yes" goto "DriveLetterRestore"
+if /i "%SureFileFrom%"=="No" goto "3"
+echo Invalid syntax!
+goto "SureFileFrom"
 
 :"DriveLetterRestore"
 echo.
@@ -424,6 +469,15 @@ goto "3"
 :"Same3"
 echo "%FileFrom%" is the same location as "%UserProfileTo%"! Please try again.
 goto "3"
+
+:"SureUserProfileTo2"
+echo.
+set SureUserProfileTo=
+set /p SureUserProfileTo="Are you sure "%FileTo%\%BackupName%" is the where you want to backup user profile %UserProfileFrom% to? (Yes/No) "
+if /i "%SureUserProfileTo%"=="Yes" goto "HiddenSystem3"
+if /i "%SureUserProfileTo%"=="No" goto "DriveLetterRestore"
+echo Invalid syntax!
+goto "SureUserProfileTo2"
 
 :"HiddenSystem3"
 echo.
