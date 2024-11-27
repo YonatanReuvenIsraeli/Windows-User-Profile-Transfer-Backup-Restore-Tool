@@ -2,4 +2,5 @@
 Transfer and/or backup and/or restore Windows user profiles.
 
 ## Notes
-Online and offline Windows installations supported.
+- Online and offline Windows installations supported.  
+- Error logs will be created.
