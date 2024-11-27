@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.0
+echo Version: 7.0.1
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -103,7 +103,7 @@ goto "1"
 :"SureUserProfileFrom"
 echo.
 set SureUserProfileFrom=
-set /p SureUserProfileFrom="Are you sure %UserProfileFrom%is the user profile you want to transfer data from? (Yes/No) "
+set /p SureUserProfileFrom="Are you sure %UserProfileFrom% is the user profile you want to transfer data from? (Yes/No) "
 if /i "%SureUserProfileFrom%"=="Yes" goto "DriveLetterTo"
 if /i "%SureUserProfileFrom%"=="No" goto "DriveLetterFrom"
 echo Invalid syntax!
