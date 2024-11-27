@@ -1,4 +1,4 @@
-# Windows User Profile Transfer/Backup/Restore Tool v6.1.10
+# Windows User Profile Transfer/Backup/Restore Tool v7.0.0
 Transfer and/or backup and/or restore Windows user profiles.
 
 ## Notes
