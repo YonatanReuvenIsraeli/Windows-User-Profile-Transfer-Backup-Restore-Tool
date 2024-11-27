@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.5
+echo Version: 7.0.6
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -192,11 +192,11 @@ echo Invalid syntax!
 goto "SureUserProfileTo1"
 
 :"TransferErrorCheck"
-if exist "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt" goto "TransferErrorExist"
+if exist "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt" goto "TransferErrorExist"
 goto "HiddenSystem1"
 
 :"TransferErrorExist"
-echo Please rename or move to another location "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt".
+echo Please rename or move to another location "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt".
 pause > nul 2>&1
 goto "1"
 
@@ -230,9 +230,9 @@ goto "TransferCheck"
 :"Transfer"
 echo.
 echo Transfering drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%.
-xcopy "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt"
+xcopy "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error1"
-echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transfered to drive letter "%DriveLetterTo%" user %UserProfileTo%! Transfer error logs can be viewed at "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt". Press any key to continue.
+echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transfered to drive letter "%DriveLetterTo%" user %UserProfileTo%! Transfer error logs can be viewed at "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -377,9 +377,9 @@ echo.
 echo Backing up drive letter "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%\%BackupName%".
 md "%FileTo%\%BackupName%"
 md "%FileTo%\%BackupName%\Files"
-xcopy "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%\Files" /y /s /e /k /r /c /q > nul 2>>"%FileTo%\%BackupName%\Backup Errors.txt"
+xcopy "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%\Files" /y /s /e /k /r /c /q > nul 2>>"%FileTo%\%BackupName%\Backup Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error2"
-echo Drive letter "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Backup Error logs can be viewed at "%FileTo%\%BackupName%\Backup Errors.txt". Press any key to continue.
+echo Drive letter "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Backup Error logs can be viewed at "%FileTo%\%BackupName%\Backup Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -490,11 +490,11 @@ echo Invalid syntax!
 goto "SureUserProfileTo2"
 
 :"RestoreErrorCheck"
-if exist "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt" goto "TransferErrorExist"
+if exist "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt" goto "TransferErrorExist"
 goto "HiddenSystem3"
 
 :"TransferErrorExist"
-echo Please rename or move to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt".
+echo Please rename or move to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt".
 pause > nul 2>&1
 goto "3"
 
@@ -528,9 +528,9 @@ goto "RestoreCheck"
 :"Restore"
 echo.
 echo Restoring "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%.
-xcopy "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt"
+xcopy "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error3"
-echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Restore error logs can be viewd at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt". Press any key to continue.
+echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewd at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
