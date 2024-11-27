@@ -1,6 +1,6 @@
-# Windows User Profile Transfer/Backup/Restore Tool v7.0.4
+# Windows User Profile Transfer/Backup/Restore Tool v7.0.6
 Transfer and/or backup and/or restore Windows user profiles.
 
 ## Notes
 - Online and offline Windows installations supported.  
-- Error logs will be created.
+- Error log will be created.
