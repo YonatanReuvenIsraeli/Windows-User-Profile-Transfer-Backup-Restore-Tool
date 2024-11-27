@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 6.1.10
+echo Version: 7.0.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -186,10 +186,19 @@ goto "DriveLetterFrom"
 echo.
 set SureUserProfileTo=
 set /p SureUserProfileTo="Are you sure %UserProfileTo% is the user profile you want to transfer data to? (Yes/No) "
-if /i "%SureUserProfileTo%"=="Yes" goto "HiddenSystem1"
+if /i "%SureUserProfileTo%"=="Yes" goto "TransferErrorCheck"
 if /i "%SureUserProfileTo%"=="No" goto "DriveLetterTo"
 echo Invalid syntax!
 goto "SureUserProfileTo1"
+
+:"TransferErrorCheck"
+if exist "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt" goto "TransferErrorExist"
+goto "HiddenSystem1"
+
+:"TransferErrorExist"
+echo Please rename or move to another location "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt".
+pause > nul 2>&1
+goto "1"
 
 :"HiddenSystem1"
 echo.
@@ -221,7 +230,7 @@ goto "TransferCheck"
 :"Transfer"
 echo.
 echo Transfering drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%.
-xcopy "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt"
 if not "%errorlevel%"=="0" goto "Error1"
 echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transfered to drive letter "%DriveLetterTo%" user %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
@@ -332,7 +341,7 @@ if exist "%FileTo%\%BackupName%" goto "FileToFileExist"
 goto "SureFileTo"
 
 :"FileToFileExist"
-echo Please rename or move to another location "%FileTo%\%UserProfileFrom% Backup File" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%UserProfileFrom% Backup File".
+echo Please rename or move to another location "%FileTo%\%BackupName%" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%FileTo%\%BackupName%".
 pause > nul 2>&1
 goto "2"
 
@@ -367,7 +376,8 @@ goto "BackupCheck"
 echo.
 echo Backing up drive letter "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%".
 md "%FileTo%\%BackupName%"
-xcopy "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%" /y /s /e /k /r /c /q > nul 2>&1
+md "%FileTo%\%BackupName%\Files"
+xcopy "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%\Files" /y /s /e /k /r /c /q > nul 2>>"%FileTo%\%BackupName%\Backup Errors.txt"
 if not "%errorlevel%"=="0" goto "Error2"
 echo Drive letter "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Press any key to continue.
 pause > nul 2>&1
@@ -474,10 +484,19 @@ goto "3"
 echo.
 set SureUserProfileTo=
 set /p SureUserProfileTo="Are you sure %UserProfileTo% is the where you want to backup user profile %UserProfileFrom% to? (Yes/No) "
-if /i "%SureUserProfileTo%"=="Yes" goto "HiddenSystem3"
+if /i "%SureUserProfileTo%"=="Yes" goto "RestoreErrorCheck"
 if /i "%SureUserProfileTo%"=="No" goto "DriveLetterRestore"
 echo Invalid syntax!
 goto "SureUserProfileTo2"
+
+:"RestoreErrorCheck"
+if exist "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt" goto "TransferErrorExist"
+goto "HiddenSystem3"
+
+:"TransferErrorExist"
+echo Please rename or move to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt".
+pause > nul 2>&1
+goto "3"
 
 :"HiddenSystem3"
 echo.
@@ -509,7 +528,7 @@ goto "RestoreCheck"
 :"Restore"
 echo.
 echo Restoring "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%.
-xcopy "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>&1
+xcopy "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt"
 if not "%errorlevel%"=="0" goto "Error3"
 echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Press any key to continue.
 pause > nul 2>&1
