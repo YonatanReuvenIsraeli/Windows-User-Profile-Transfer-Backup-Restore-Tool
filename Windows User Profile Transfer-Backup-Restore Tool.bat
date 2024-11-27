@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.6
+echo Version: 7.0.7
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -530,7 +530,7 @@ echo.
 echo Restoring "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%.
 xcopy "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error3"
-echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewd at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt". Press any key to continue.
+echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewd at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
