@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.2
+echo Version: 7.0.3
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -232,7 +232,7 @@ echo.
 echo Transfering drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%.
 xcopy "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt"
 if not "%errorlevel%"=="0" goto "Error1"
-echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transfered to drive letter "%DriveLetterTo%" user %UserProfileTo%! Press any key to continue.
+echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transfered to drive letter "%DriveLetterTo%" user %UserProfileTo%! Error logs can be viewed at "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Errors.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -379,7 +379,7 @@ md "%FileTo%\%BackupName%"
 md "%FileTo%\%BackupName%\Files"
 xcopy "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%\Files" /y /s /e /k /r /c /q > nul 2>>"%FileTo%\%BackupName%\Backup Errors.txt"
 if not "%errorlevel%"=="0" goto "Error2"
-echo Drive letter "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Press any key to continue.
+echo Drive letter "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Error logs can be viewed at "%FileTo%\%BackupName%\Backup Errors.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -530,7 +530,7 @@ echo.
 echo Restoring "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%.
 xcopy "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt"
 if not "%errorlevel%"=="0" goto "Error3"
-echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Press any key to continue.
+echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Error logs can be viewd at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Errors.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
