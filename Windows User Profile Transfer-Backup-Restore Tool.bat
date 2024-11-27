@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.4
+echo Version: 7.0.5
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -366,7 +366,7 @@ goto "HiddenSystem2"
 :"BackupCheck"
 echo.
 set Check=
-set /p Check="There is no going back after this! Are you sure you want to backup drive letter "%DriveLetterBackup%" to "%FileTo%"? (Yes/No) "
+set /p Check="There is no going back after this! Are you sure you want to backup drive letter "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%\%BackupName%"? (Yes/No) "
 if /i "%Check%"=="Yes" goto "Backup"
 if /i "%Check%"=="No" goto "Start"
 echo Invalid syntax!
