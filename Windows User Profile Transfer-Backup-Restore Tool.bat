@@ -2,11 +2,11 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.9
+echo Version: 7.0.10
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
-echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli 
+echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli
 "%windir%\System32\net.exe" session > nul 2>&1
 if not "%errorlevel%"=="0" goto "NotAdministrator"
 goto "Start"
