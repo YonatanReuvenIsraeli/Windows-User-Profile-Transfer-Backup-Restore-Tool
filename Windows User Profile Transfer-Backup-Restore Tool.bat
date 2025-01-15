@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.10
+echo Version: 7.0.11
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -25,7 +25,7 @@ echo [3] Restore from a file to a user profile.
 echo [4] Exit.
 echo.
 set Start=
-set /p Start=" What would you like to do? (1-4) "
+set /p Start="What would you like to do? (1-4) "
 if /i "%Start%"=="1" goto "DriveLetterFrom"
 if /i "%Start%"=="2" goto "DriveLetterBackup"
 if /i "%Start%"=="3" goto "3"
