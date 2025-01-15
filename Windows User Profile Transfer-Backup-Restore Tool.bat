@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.11
+echo Version: 7.0.12
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -376,8 +376,8 @@ goto "BackupCheck"
 :"Backup"
 echo.
 echo Backing up drive letter "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%\%BackupName%".
-md "%FileTo%\%BackupName%"
-md "%FileTo%\%BackupName%\Files"
+md "%FileTo%\%BackupName%" > nul 2>&1
+md "%FileTo%\%BackupName%\Files" > nul 2>&1
 "%windir%\System32\xcopy.exe" "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%\Files" /y /s /e /k /r /c /q > nul 2>>"%FileTo%\%BackupName%\Backup Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error2"
 echo Drive letter "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Backup Error logs can be viewed at "%FileTo%\%BackupName%\Backup Error Log.txt". Press any key to continue.
