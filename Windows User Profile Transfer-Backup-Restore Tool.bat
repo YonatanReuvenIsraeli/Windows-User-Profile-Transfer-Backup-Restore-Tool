@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.12
+echo Version: 7.0.13
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -199,7 +199,7 @@ goto "HiddenSystem1"
 :"TransferErrorExist"
 echo Please rename or move to another location "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt".
 pause > nul 2>&1
-goto "1"
+goto "TransferErrorCheck"
 
 :"HiddenSystem1"
 echo.
@@ -491,13 +491,13 @@ echo Invalid syntax!
 goto "SureUserProfileTo2"
 
 :"RestoreErrorCheck"
-if exist "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt" goto "TransferErrorExist"
+if exist "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt" goto "RestoreErrorExist"
 goto "HiddenSystem3"
 
-:"TransferErrorExist"
+:"RestoreErrorExist"
 echo Please rename or move to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt".
 pause > nul 2>&1
-goto "3"
+goto "RestoreErrorCheck"
 
 :"HiddenSystem3"
 echo.
