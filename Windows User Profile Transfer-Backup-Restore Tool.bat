@@ -2,7 +2,7 @@
 setlocal
 title Windows User Profile Transfer/Backup/Restore Tool
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.13
+echo Version: 7.0.14
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -230,10 +230,10 @@ goto "TransferCheck"
 
 :"Transfer"
 echo.
-echo Transfering drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%.
+echo Transferring drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%.
 "%windir%\System32\xcopy.exe" "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error1"
-echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transfered to drive letter "%DriveLetterTo%" user %UserProfileTo%! Transfer error logs can be viewed at "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt". Press any key to continue.
+echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transferred to drive letter "%DriveLetterTo%" user %UserProfileTo%! Transfer error logs can be viewed at "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -531,7 +531,7 @@ echo.
 echo Restoring "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%.
 "%windir%\System32\xcopy.exe" "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error3"
-echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewd at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt". Press any key to continue.
+echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewed at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
