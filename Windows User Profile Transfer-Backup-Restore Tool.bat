@@ -2,7 +2,7 @@
 title Windows User Profile Transfer/Backup/Restore Tool
 setlocal
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.15
+echo Version: 7.0.16
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -180,7 +180,7 @@ echo %UserProfileTo% does not exist! Please try again.
 goto "1"
 
 :"Same1"
-echo Drive letter "%DriveLetterFrom%" and user %UserProfileFrom% is the same as drive letter "%DriveLetterTo%" and user %UserProfileTo%! Please try again.
+echo Windows installation "%DriveLetterFrom% user %UserProfileFrom% is the same as Windows installation "%DriveLetterTo%" user %UserProfileTo%! Please try again.
 goto "DriveLetterFrom"
 
 :"SureUserProfileTo1"
@@ -222,7 +222,7 @@ goto "Sure1"
 :"TransferCheck"
 echo.
 set Check=
-set /p Check="There is no going back after this! Are you sure you want to transfer drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%? (Yes/No) "
+set /p Check="There is no going back after this! Are you sure you want to transfer Windows installation "%DriveLetterFrom%" user %UserProfileFrom% to Windows installation "%DriveLetterTo%" user %UserProfileTo%? (Yes/No) "
 if /i "%Check%"=="Yes" goto "Transfer"
 if /i "%Check%"=="No" goto "Start"
 echo Invalid syntax!
@@ -230,10 +230,10 @@ goto "TransferCheck"
 
 :"Transfer"
 echo.
-echo Transferring drive letter "%DriveLetterFrom%" user %UserProfileFrom% to drive letter "%DriveLetterTo%" user %UserProfileTo%.
+echo Transferring Windows installation "%DriveLetterFrom%" user %UserProfileFrom% to Windows installation "%DriveLetterTo%" user %UserProfileTo%.
 "%windir%\System32\xcopy.exe" "%DriveLetterFrom%\Users\%UserProfileFrom%\*.*" "%DriveLetterTo%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error1"
-echo Drive letter "%DriveLetterFrom%" user %UserProfileFrom% transferred to drive letter "%DriveLetterTo%" user %UserProfileTo%! Transfer error logs can be viewed at "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt". Press any key to continue.
+echo Windows installation "%DriveLetterFrom%" user %UserProfileFrom% transferred to Windows installation "%DriveLetterTo%" user %UserProfileTo%! Transfer error logs can be viewed at "%DriveLetterTo%\Users\%UserProfileTo%\%UserProfileFrom% Transfer Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -367,7 +367,7 @@ goto "HiddenSystem2"
 :"BackupCheck"
 echo.
 set Check=
-set /p Check="There is no going back after this! Are you sure you want to backup drive letter "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%\%BackupName%"? (Yes/No) "
+set /p Check="There is no going back after this! Are you sure you want to backup Windows installation "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%\%BackupName%"? (Yes/No) "
 if /i "%Check%"=="Yes" goto "Backup"
 if /i "%Check%"=="No" goto "Start"
 echo Invalid syntax!
@@ -375,12 +375,12 @@ goto "BackupCheck"
 
 :"Backup"
 echo.
-echo Backing up drive letter "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%\%BackupName%".
+echo Backing up Windows installation "%DriveLetterBackup%" user %UserProfileFrom% to "%FileTo%\%BackupName%".
 md "%FileTo%\%BackupName%" > nul 2>&1
 md "%FileTo%\%BackupName%\Files" > nul 2>&1
 "%windir%\System32\xcopy.exe" "%DriveLetterBackup%\Users\%UserProfileFrom%\*.*" "%FileTo%\%BackupName%\Files" /y /s /e /k /r /c /q > nul 2>>"%FileTo%\%BackupName%\Backup Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error2"
-echo Drive letter "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Backup Error logs can be viewed at "%FileTo%\%BackupName%\Backup Error Log.txt". Press any key to continue.
+echo Windows installation "%DriveLetterBackup%" user %UserProfileFrom% backed up to "%FileTo%"! Backup Error logs can be viewed at "%FileTo%\%BackupName%\Backup Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
@@ -520,7 +520,7 @@ goto "Sure3"
 :"RestoreCheck"
 echo.
 set Check=
-set /p Check="There is no going back after this! Are you sure you want to restore "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%? (Yes/No) "
+set /p Check="There is no going back after this! Are you sure you want to restore "%FileFrom%" to Windows installation "%DriveLetterRestore%" user %UserProfileTo%? (Yes/No) "
 if /i "%Check%"=="Yes" goto "Restore"
 if /i "%Check%"=="No" goto "Start"
 echo Invalid syntax!
@@ -528,10 +528,10 @@ goto "RestoreCheck"
 
 :"Restore"
 echo.
-echo Restoring "%FileFrom%" to drive letter "%DriveLetterRestore%" user %UserProfileTo%.
+echo Restoring "%FileFrom%" to Windows installation "%DriveLetterRestore%" user %UserProfileTo%.
 "%windir%\System32\xcopy.exe" "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error3"
-echo %FileFrom% restored to drive letter "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewed at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt". Press any key to continue.
+echo %FileFrom% restored to Windows installation "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewed at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
