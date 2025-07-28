@@ -2,7 +2,7 @@
 title Windows User Profile Transfer/Backup/Restore Tool
 setlocal
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.17
+echo Version: 7.0.18
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
