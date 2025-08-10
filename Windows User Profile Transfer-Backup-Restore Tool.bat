@@ -180,6 +180,7 @@ echo %UserProfileTo% does not exist! Please try again.
 goto "1"
 
 :"Same1"
+echo Windows installation "%DriveLetterFrom% user %UserProfileFrom% is the same as Windows installation "%DriveLetterTo%" user %UserProfileTo%! Please try again.
 goto "DriveLetterFrom"
 
 :"SureUserProfileTo1"
@@ -542,4 +543,5 @@ goto "3"
 endlocal
 
 exit
+
 
