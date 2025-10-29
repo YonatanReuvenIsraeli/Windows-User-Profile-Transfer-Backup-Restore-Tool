@@ -2,7 +2,7 @@
 title Windows User Profile Transfer/Backup/Restore Tool
 setlocal
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.20
+echo Version: 7.0.21
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -529,9 +529,9 @@ goto "RestoreCheck"
 :"Restore"
 echo.
 echo Restoring "%FileFrom%" to Windows installation "%DriveLetterRestore%" user %UserProfileTo%.
-"%windir%\System32\xcopy.exe" "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt"
+"%windir%\System32\xcopy.exe" "%FileFrom%\*.*" "%DriveLetterRestore%\Users\%UserProfileTo%" /y /s /e /k /r /c /q > nul 2>>"%DriveLetterRestore%\Users\%UserProfileTo%\%UserProfileTo% Restore Error Log.txt"
 if not "%errorlevel%"=="0" goto "Error3"
-echo %FileFrom% restored to Windows installation "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewed at %DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt". Press any key to continue.
+echo %FileFrom% restored to Windows installation "%DriveLetterRestore%" user %UserProfileTo%! Restore error log can be viewed at "%DriveLetterRestore%\Users\%UserProfileTo%\%UserProfileTo% Restore Error Log.txt". Press any key to continue.
 pause > nul 2>&1
 goto "Start"
 
