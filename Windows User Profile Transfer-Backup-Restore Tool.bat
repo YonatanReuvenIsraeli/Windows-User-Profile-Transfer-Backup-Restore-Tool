@@ -491,11 +491,11 @@ echo Invalid syntax!
 goto "SureUserProfileTo2"
 
 :"RestoreErrorCheck"
-if exist "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt" goto "RestoreErrorExist"
+if exist "%DriveLetterRestore%\Users\%UserProfileTo%\%UserProfileTo% Restore Error Log.txt" goto "RestoreErrorExist"
 goto "HiddenSystem3"
 
 :"RestoreErrorExist"
-echo Please rename or move to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%FileFrom% Restore Error Log.txt".
+echo Please rename or move to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%UserProfileTo% Restore Error Log.txt" in order for this batch file to continue. Press any key to continue when you have renamed or moved to another location "%DriveLetterRestore%\Users\%UserProfileTo%\%UserProfileTo% Restore Error Log.txt".
 pause > nul 2>&1
 goto "RestoreErrorCheck"
 
