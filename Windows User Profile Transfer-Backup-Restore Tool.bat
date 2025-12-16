@@ -2,7 +2,7 @@
 title Windows User Profile Transfer/Backup/Restore Tool
 setlocal
 echo Program Name: Windows User Profile Transfer/Backup/Restore Tool
-echo Version: 7.0.23
+echo Version: 7.0.24
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -302,7 +302,7 @@ dir "%DriveLetterBackup%\Users" /b
 echo.
 set UserProfileFrom=
 set /p UserProfileFrom="What is the user profile you want to backup data from? "
-if not exist "%DriveLetterBackup%\Users\%UserProfileFrom%" goto "UseProfileFromNotExist2"
+if not exist "%DriveLetterBackup%\Users\%UserProfileFrom%" goto "UserProfileFromNotExist2"
 goto "SureBackup"
 
 :"UserProfileFromNotExist2"
@@ -353,7 +353,7 @@ set /p SureFileTo="Are you sure "%FileTo%\%BackupName%" is where you want to bac
 if /i "%SureFileTo%"=="Yes" goto "HiddenSystem2"
 if /i "%SureFileTo%"=="No" goto "FileTo"
 echo Invalid syntax!
-goto "SureFileName"
+goto "SureFileTo"
 
 :"HiddenSystem2"
 echo.
